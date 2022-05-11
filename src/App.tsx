@@ -1,9 +1,5 @@
-import FunctionalComponent from './components/FunctionalComponent/index'
-import ClassHello from './components/ClassComponent/index'
-import CreateElem from './components/CreateElem/index'
-import PureClassHello from './components/PureComponent/index'
-import SearchBar from './components/SearchBar/index'
-import GenreMenuBar from './components/GenreMenuBar/index'
+// @ts-ignore
+import { FunctionalComponent, ClassHello, CreateElem, PureClassHello, SearchBar, GenreMenuBar } from './components/index.js'
 
 import './App.scss';
 
