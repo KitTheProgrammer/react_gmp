@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
-import { searchBarPlaceholder } from '../../GlobalConstants'
+// @ts-ignore
+import { searchBarPlaceholder } from '../../GlobalConstants.ts'
 
 import './styles/styles.scss'
 
