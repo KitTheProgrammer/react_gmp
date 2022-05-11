@@ -1,9 +1,9 @@
-import FunctionalComponent from './components/FunctionalComponent'
-import ClassHello from './components/ClassComponent'
-import CreateElem from './components/CreateElem'
-import PureClassHello from './components/PureComponent'
-import SearchBar from './components/SearchBar'
-import GenreMenuBar from './components/GenreMenuBar'
+import FunctionalComponent from './components/FunctionalComponent/index'
+import ClassHello from './components/ClassComponent/index'
+import CreateElem from './components/CreateElem/index'
+import PureClassHello from './components/PureComponent/index'
+import SearchBar from './components/SearchBar/index'
+import GenreMenuBar from './components/GenreMenuBar/index'
 
 import './App.scss';
 
