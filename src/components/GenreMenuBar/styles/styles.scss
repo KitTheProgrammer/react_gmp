@@ -1,0 +1,27 @@
+@import "./src/theme/constants";
+
+.genre-menu-bar {
+  position: relative;
+  white-space: nowrap;
+  background: #232323;
+  margin: 2em 0;
+
+  &__item {
+    display: inline-block;
+    z-index: 10;
+    width: 20%;
+    height: 100%;
+    padding: 1em 0;
+    text-align: center;
+    cursor: pointer;
+    background-color: unset;
+    border: none;
+    color: inherit;
+    border-bottom: #080707 solid 2px;
+    transition: border-bottom 500ms ease;
+
+    &__underlined {
+      border-bottom: $main-button-color solid 2px;
+    }
+  }
+}

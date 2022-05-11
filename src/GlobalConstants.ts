@@ -1,0 +1,1 @@
+export const searchBarPlaceholder = 'What do you want to watch?'
