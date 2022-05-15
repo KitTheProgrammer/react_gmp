@@ -1,4 +1,5 @@
-import MainPage from './pages/MainPage'
+// @ts-ignore
+import MainPage from './pages/MainPage/index.tsx'
 
 function App() {
   return (
