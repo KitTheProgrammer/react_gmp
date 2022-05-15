@@ -11,14 +11,17 @@ const SearchBar = () => {
     alert(`Searched for "${searchInput}".`)
   }, [searchInput])
 
-  return <div className={'search-bar'}>
-    <input
-      className={'search-bar__input'}
-      value={searchInput}
-      onChange={({ target: { value } }) => setSearchInput(value)}
-      placeholder={searchBarPlaceholder}
-    />
-    <button className={'search-bar__search'} onClick={invokeSearch}>SEARCH</button>
+  return <div className={'search-bar-wrapper'}>
+    <span>FIND YOUR MOVIE</span>
+    <div className={'search-bar'}>
+      <input
+        className={'search-bar__input'}
+        value={searchInput}
+        onChange={({ target: { value } }) => setSearchInput(value)}
+        placeholder={searchBarPlaceholder}
+      />
+      <button className={'search-bar__search'} onClick={invokeSearch}>SEARCH</button>
+    </div>
   </div>
 }
 

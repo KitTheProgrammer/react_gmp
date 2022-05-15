@@ -1,18 +1,8 @@
-// @ts-ignore
-import { FunctionalComponent, ClassHello, CreateElem, PureClassHello, SearchBar, GenreMenuBar } from './components/index.js'
-
-import './App.scss';
+import MainPage from './pages/MainPage'
 
 function App() {
   return (
-    <div>
-      <ClassHello/>
-      {CreateElem}
-      <FunctionalComponent/>
-      <PureClassHello/>
-      <SearchBar/>
-      <GenreMenuBar/>
-    </div>
+    <MainPage testProp={'Hello word!'}/>
   );
 }
 

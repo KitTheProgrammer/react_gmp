@@ -1,0 +1,30 @@
+@import "src/theme/constants";
+
+.add-movie-wrapper {
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4rem 0 4rem;
+
+  span {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24.38px;
+    color: $main-button-color
+  }
+
+  .add-movie-button {
+    width: 177px;
+    height: 46px;
+    border-radius: $default-border-radius;
+    background-color: rgba(96, 96, 96, 0.68);
+    border: none;
+    text-align: center;
+    color: $main-button-color;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24.38px;
+  }
+}
