@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './styles/styles.scss'
+import './styles.scss'
 
 import { SearchBar, AddMovieButton } from '../index'
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Header } from '../../components'
 
-import './styles/styles.scss'
+import './styles.scss'
 
 export interface MainPageProps {
   testProp: string

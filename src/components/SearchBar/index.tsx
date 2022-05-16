@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 // @ts-ignore
 import { searchBarPlaceholder } from '../../GlobalConstants.ts'
 
-import './styles/styles.scss'
+import './styles.scss'
 
 const SearchBar = () => {
   const [searchInput, setSearchInput] = useState('')
