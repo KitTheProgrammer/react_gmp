@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import './styles/styles.scss'
+import './styles.scss'
 
 const labels = ['ALL', 'DOCUMENTARY', 'COMEDY', 'HORROR', 'CRIME']
 

@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react'
 
-import './styles/styles.scss'
+import './styles.scss'
 
 const AddMovieButton = (): React.ReactElement => {
   const handlePress = useCallback(() => {

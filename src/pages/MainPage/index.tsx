@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // @ts-ignore
 import { Header } from '../../components/index.ts'
 
-import './styles/styles.scss'
+import './styles.scss'
 
 export interface MainPageProps {
   testProp: string

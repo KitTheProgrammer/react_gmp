@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './styles/styles.scss'
+import './styles.scss'
 
 // @ts-ignore
 import { SearchBar, AddMovieButton } from '../index.ts'
