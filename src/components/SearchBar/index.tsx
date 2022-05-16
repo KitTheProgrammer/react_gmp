@@ -8,7 +8,7 @@ const SearchBar = () => {
   const [searchInput, setSearchInput] = useState('')
 
   const invokeSearch = useCallback(() => {
-    alert(`Searched for "${searchInput}"`)
+    alert(`Searched for "${searchInput}".`)
   }, [searchInput])
 
   return <div className={'search-bar'}>
