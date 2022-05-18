@@ -4,7 +4,7 @@ interface ErrorBoundaryState {
   hasError: boolean
   errorData: {
     error: null | unknown
-    errorInfo: null | unknown
+    errorInfo: null | { componentStack: string }
   }
 }
 
@@ -28,17 +28,17 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     return { hasError: true }
   }
 
-  componentDidCatch(error: any, errorInfo: any) {
+  componentDidCatch(error: any, errorInfo: { componentStack: string }) {
     console.log(error, errorInfo)
     this.setState({ errorData: { error, errorInfo } })
   }
 
   render() {
     if (this.state.hasError) {
-      return <h1>
-        Something went wrong.
-        {JSON.stringify(this.state.errorData)}
-      </h1>
+      return <div style={{ paddingLeft: '1rem' }}>
+        <h1>Something went wrong.</h1>
+        {this.state.errorData.errorInfo?.componentStack.split('\n').map((it) => (<><span>{it}</span><br/></>))}
+      </div>
     }
 
     return this.props.children || <>Something terrible happened</>

@@ -1,0 +1,9 @@
+@import 'src/theme/constants';
+
+.main-body {
+  min-height: 200px;
+  width: calc(100vw - 8rem);
+  margin-top: 1rem;
+  background-color: $main-bg-color;
+  padding: 0 4rem;
+}
