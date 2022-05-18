@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
-import { TopBar } from './components'
+// @ts-ignore
+import { TopBar } from './components/index.ts'
 
 import './styles.scss'
 

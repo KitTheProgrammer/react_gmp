@@ -1,14 +1,18 @@
 import React from 'react'
 
-import { GenreMenuBar, SortMenu } from '../index'
-import { GenreMenuBarProps } from '../GenreMenuBar'
-import { SortMenuProps } from '../SortMenu'
+// @ts-ignore
+import { GenreMenuBar, SortMenu } from '../index.ts'
+// @ts-ignore
+import { GenreMenuBarProps } from '../GenreMenuBar/index.tsx'
+// @ts-ignore
+import { SortMenuProps } from '../SortMenu/index.tsx'
 
 import './styles.scss'
 import PropTypes from 'prop-types'
 
 export interface TopBarProps extends GenreMenuBarProps, SortMenuProps {}
 
+// @ts-ignore
 const TopBar: React.FC<TopBarProps> = ({ genre, setGenre, currentSortItem, sortItems, setSortItem }) => {
 
   return <div className={'top-bar'}>
