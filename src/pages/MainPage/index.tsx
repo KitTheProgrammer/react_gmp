@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 // @ts-ignore
-import { Header } from '../../components/index.ts'
+import { Header, Body } from '../../components/index.ts'
 
 import './styles.scss'
 
@@ -15,6 +15,7 @@ const MainPage = ({ testProp }: MainPageProps): React.ReactElement => {
   return (
     <div className={'main-page'}>
       <Header/>
+      <Body/>
     </div>
   )
 }

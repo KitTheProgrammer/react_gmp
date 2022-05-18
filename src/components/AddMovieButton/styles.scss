@@ -15,6 +15,7 @@
   }
 
   .add-movie-button {
+    font-family: Montserrat;
     width: 177px;
     height: 46px;
     border-radius: $default-border-radius;
@@ -22,7 +23,6 @@
     border: none;
     text-align: center;
     color: $main-button-color;
-    font-family: Montserrat;
     font-weight: 600;
     font-size: 20px;
     line-height: 24.38px;

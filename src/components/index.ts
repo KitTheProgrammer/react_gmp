@@ -9,11 +9,12 @@ import PureClassHello from './PureComponent/index.tsx'
 // @ts-ignore
 import SearchBar from './SearchBar/index.tsx'
 // @ts-ignore
-import GenreMenuBar from './GenreMenuBar/index.tsx'
-// @ts-ignore
 import Header from './Header/index.tsx'
 // @ts-ignore
 import AddMovieButton from './AddMovieButton/index.tsx'
+// @ts-ignore
+import Body from './Body'
+
 
 export {
   FunctionalComponent,
@@ -21,7 +22,7 @@ export {
   CreateElem,
   PureClassHello,
   SearchBar,
-  GenreMenuBar,
   Header,
-  AddMovieButton
+  AddMovieButton,
+  Body,
 }
