@@ -1,0 +1,43 @@
+.film {
+  margin-top: 1rem;
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__top {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      h2 {
+        font-family: Montserrat;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21.94px;
+        opacity: 0.7;
+      }
+
+      h3 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        opacity: 0.5;
+        border: 1px solid #979797;
+        border-radius: 4px;
+      }
+    }
+
+    &__bottom {
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      opacity: 0.5;
+    }
+  }
+}

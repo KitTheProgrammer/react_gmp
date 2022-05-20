@@ -1,6 +1,25 @@
 .top-bar {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: #080707 solid 2px;
+
+  &__main {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: #080707 solid 2px;
+  }
+
+  &__info {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+
+    b {
+      font-weight: 600;
+    }
+  }
 }

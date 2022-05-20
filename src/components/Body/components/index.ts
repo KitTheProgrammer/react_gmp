@@ -4,5 +4,7 @@ import GenreMenuBar from './GenreMenuBar/index.tsx'
 import TopBar from './TopBar/index.tsx'
 // @ts-ignore
 import SortMenu from './SortMenu/index.tsx'
+// @ts-ignore
+import Film from './Film/index.tsx'
 
-export { GenreMenuBar, TopBar, SortMenu }
+export { GenreMenuBar, TopBar, SortMenu, Film }
