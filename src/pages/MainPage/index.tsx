@@ -15,6 +15,9 @@ const MainPage = ({ testProp }: MainPageProps): React.ReactElement => {
     <div className={'main-page'}>
       <Header/>
       <Body/>
+      <div className={'main-page__footer'}>
+        <span className={'main-logo'}><b>netflix</b>roulette</span>
+      </div>
     </div>
   )
 }

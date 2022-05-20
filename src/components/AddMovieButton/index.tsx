@@ -9,7 +9,7 @@ const AddMovieButton = (): React.ReactElement => {
 
   return (
     <div className={'add-movie-wrapper'}>
-      <span><b>netflix</b>roulette</span>
+      <span className={'main-logo'}><b>netflix</b>roulette</span>
       <button
         className={'add-movie-button'}
         onClick={handlePress}
