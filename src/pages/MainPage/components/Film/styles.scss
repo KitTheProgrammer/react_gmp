@@ -1,0 +1,127 @@
+@import "src/theme/constants";
+
+.film {
+  margin-top: 1rem;
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $light-bg-color;
+  }
+
+  &__menu {
+    display: none;
+  }
+
+  .film__menu__inner {
+    display: none;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__top {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      h2 {
+        font-family: Montserrat;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21.94px;
+        opacity: 0.7;
+      }
+
+      h3 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        opacity: 0.5;
+        border: 1px solid #979797;
+        border-radius: 4px;
+        padding: 5px;
+      }
+    }
+
+    &__bottom {
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      opacity: 0.5;
+    }
+  }
+}
+
+.film-selected {
+
+  .film__menu {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    background-color: #2A202D;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    left: calc(100% - 40px);
+    top: 4px;
+
+    &__ball {
+      width: 4px;
+      height: 4px;
+      border-radius: 100%;
+      background-color: white;
+    }
+
+    &__inner {
+      display: none;
+    }
+
+    &__open {
+      display: none;
+    }
+  }
+
+  .film__menu__inner {
+    display: none;
+
+    &__open {
+      position: absolute;
+      width: 190px;
+      min-height: 111px;
+      background-color: $main-bg-color;
+      border-radius: unset;
+      left: calc(100% - 194px);
+      top: 4px;
+      display: flex;
+      flex-direction: column;
+
+      button {
+        flex-grow: 1;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        padding: 0 1rem;
+
+        &:hover {
+          background-color: $light-bg-color;
+        }
+      }
+
+      .film__menu__inner__close {
+        flex-grow: unset;
+        align-self: flex-end;
+      }
+    }
+  }
+}

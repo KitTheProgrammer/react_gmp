@@ -1,7 +1,6 @@
 import React, {useCallback, useMemo, useState} from 'react'
 
-import { TopBar, Film } from './components'
-import { FilmProps } from './components/Film'
+import { TopBar, Film } from '../../pages/MainPage/components'
 // @ts-ignore
 import pulpFiction from '../../assets/images/Pulp_fiction.png'
 // @ts-ignore
@@ -14,7 +13,14 @@ import './styles.scss'
 const genreLabels = ['ALL', 'DOCUMENTARY', 'COMEDY', 'HORROR', 'CRIME']
 const sortItems = ['RELEASE DATE', 'A-Z', 'Z-A']
 
-const filmsMocks: FilmProps[] = [
+interface FilmData {
+  imgHref: string
+  genre: string
+  title: string
+  releaseDate: number
+}
+
+const filmsMocks: FilmData[] = [
   {
     title: 'Pulp Fiction',
     genre: 'Action & Adventure, comedy',
@@ -50,8 +56,9 @@ const filmsMocks: FilmProps[] = [
 const Body = () => {
   const [genre, setGenre] = useState(genreLabels[0])
   const [sortOption, setSortOption] = useState(0)
+  const [selectedFilm, setSelectedFilm] = useState(-1)
 
-  const filterOptionFunction = useCallback((films: FilmProps[]) => {
+  const filterOptionFunction = useCallback((films: FilmData[]) => {
     if (genre !== genreLabels[0]) {
       films = films.filter((film) => film.genre.toLowerCase().includes(genre.toLowerCase()))
     }
@@ -74,6 +81,9 @@ const Body = () => {
 
   const currFilms = useMemo(() => filterOptionFunction(filmsMocks), [filterOptionFunction])
 
+  const deleteVideo = useCallback((ind: number) => alert(`delete video #${ind}`), [])
+  const editVideo = useCallback((txt: string) => alert(`edit video ${txt}`), [])
+
   return (
     <div className={'main-body'}>
       <TopBar
@@ -86,7 +96,18 @@ const Body = () => {
       />
       <div className={'main-body__film-bar'}>
         {currFilms.map(({ title, imgHref, releaseDate, genre }, index) => (
-          <Film imgHref={imgHref} genre={genre} title={title} releaseDate={releaseDate} index={index}/>
+          <Film
+            imgHref={imgHref}
+            genre={genre}
+            title={title}
+            releaseDate={releaseDate}
+            index={index}
+            onClick={setSelectedFilm}
+            selected={index === selectedFilm}
+            onEdit={editVideo}
+            onDelete={deleteVideo}
+            key={`${releaseDate}_${title}_${genre}_${index}`}
+          />
         ))}
       </div>
     </div>
