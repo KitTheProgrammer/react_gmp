@@ -1,6 +1,7 @@
 import React, {useCallback, useRef, useState} from 'react'
 
-import { useOnClickOutside } from '../../utils'
+//@ts-ignore
+import { useOnClickOutside } from '../../utils/index.ts'
 
 import './styles.scss'
 

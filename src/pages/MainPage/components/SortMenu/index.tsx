@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
-import { ArrowDown } from '../../../../assets/icons'
+//@ts-ignore
+import { ArrowDown } from '../../../../assets/icons/index.tsx'
 
 import './styles.scss'
 

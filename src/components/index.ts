@@ -13,10 +13,13 @@ import Header from './Header/index.tsx'
 // @ts-ignore
 import AddMovieButton from './AddMovieButton/index.tsx'
 // @ts-ignore
-import Body from './Body'
-import Modal from './Modal'
-import FormInput from './FormInput'
-import FormSelect from './FormSelect'
+import Body from './Body/index.tsx'
+//@ts-ignore
+import Modal from './Modal/index.tsx'
+//@ts-ignore
+import FormInput from './FormInput/index.tsx'
+//@ts-ignore
+import FormSelect from './FormSelect/index.tsx'
 
 
 export {

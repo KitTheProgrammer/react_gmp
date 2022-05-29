@@ -3,7 +3,7 @@ import React, { useMemo, useState } from 'react'
 // @ts-ignore
 import { Film, TopBar } from '../../pages/MainPage/components/index.ts'
 // @ts-ignore
-import { genreLabels } from '../../GlobalConstants/index.tsx'
+import { genreLabels } from '../../GlobalConstants.ts'
 
 import './styles.scss'
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
-import { FilmData } from '../../../../components/Body'
+//@ts-ignore
+import { FilmData } from '../../../../components/Body/index.tsx'
 
 import './styles.scss'
 

@@ -1,9 +1,13 @@
 import React, {useCallback, useEffect, useState} from 'react'
 
-import { Modal, FormInput, FormSelect } from '../../../../components'
-import { getInputFormattedTime } from '../../../../utils'
-import { FilmData } from '../../../../components/Body'
-import { genreLabels } from '../../../../GlobalConstants'
+//@ts-ignore
+import { Modal, FormInput, FormSelect } from '../../../../components/index.ts'
+//@ts-ignore
+import { getInputFormattedTime } from '../../../../utils/index.ts'
+//@ts-ignore
+import { FilmData } from '../../../../components/Body/index.tsx'
+//@ts-ignore
+import { genreLabels } from '../../../../GlobalConstants.ts'
 
 import './styles.scss'
 
@@ -57,7 +61,7 @@ const EditMovieModal: React.FC<EditMovieModalProps> = (props) => {
           label={'Release date'}
           placeholder={'Release date'}
           value={getInputFormattedTime(releaseDate)}
-          onChange={(v) => setReleaseDate(new Date(v).getTime())}
+          onChange={(v: any) => setReleaseDate(new Date(v).getTime())}
           type={'date'}
         />
       </div>
@@ -67,7 +71,7 @@ const EditMovieModal: React.FC<EditMovieModalProps> = (props) => {
           label={'Rating'}
           placeholder={'Rating'}
           value={String(rating)}
-          onChange={(v) => setRating(Number(v))}
+          onChange={(v: any) => setRating(Number(v))}
           type={'number'}
         />
       </div>
@@ -77,7 +81,7 @@ const EditMovieModal: React.FC<EditMovieModalProps> = (props) => {
           label={'Runtime'}
           placeholder={'Runtime'}
           value={`${runtime}`}
-          onChange={(v) => setRuntime(Number(v))}
+          onChange={(v: any) => setRuntime(Number(v))}
           type={'number-type'}
         />
       </div>
@@ -92,4 +96,5 @@ const EditMovieModal: React.FC<EditMovieModalProps> = (props) => {
   </Modal>
 }
 
+// @ts-ignore
 export default EditMovieModal
