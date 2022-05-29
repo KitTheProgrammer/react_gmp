@@ -8,7 +8,6 @@ import { GenreMenuBarProps } from '../GenreMenuBar/index.tsx'
 import { SortMenuProps } from '../SortMenu/index.tsx'
 
 import './styles.scss'
-import PropTypes from 'prop-types'
 
 export interface TopBarProps extends GenreMenuBarProps, SortMenuProps {
   filmsFound: number
@@ -27,16 +26,6 @@ const TopBar: React.FC<TopBarProps> = (props) => {
       <b>{filmsFound}</b>&nbsp; movies found
     </div>
   </div>
-}
-
-TopBar.propTypes = {
-  // @ts-ignore
-  genre: PropTypes.string.isRequired,
-  setGenre: PropTypes.func.isRequired,
-  sortItems: PropTypes.array.isRequired,
-  currentSortItem: PropTypes.number.isRequired,
-  setSortItem: PropTypes.func.isRequired,
-  filmsFound: PropTypes.number.isRequired,
 }
 
 export default TopBar

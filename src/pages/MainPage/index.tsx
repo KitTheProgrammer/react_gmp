@@ -1,5 +1,4 @@
 import React, {useCallback, useState} from 'react'
-import PropTypes from 'prop-types'
 
 // @ts-ignore
 import { Header, Body, Modal } from '../../components/index.ts'
@@ -111,10 +110,6 @@ const MainPage = (): React.ReactElement => {
       </div>
     </div>
   )
-}
-
-MainPage.propTypes = {
-  testProp: PropTypes.string
 }
 
 export default MainPage

@@ -4,7 +4,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 
 function App() {
   return (
-    <MainPage testProp={'Hello word!'}/>
+    <MainPage/>
   );
 }
 

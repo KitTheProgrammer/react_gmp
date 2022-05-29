@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { genreLabels as labels } from '../../../../GlobalConstants'
 
@@ -22,11 +21,6 @@ const GenreMenuBar = ({ genre, setGenre }: GenreMenuBarProps): React.ReactElemen
       </button>
     ))}
   </nav>)
-}
-
-GenreMenuBar.propTypes = {
-  genre: PropTypes.string.isRequired,
-  setGenre: PropTypes.func.isRequired,
 }
 
 export default GenreMenuBar

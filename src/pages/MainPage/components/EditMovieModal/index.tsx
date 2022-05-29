@@ -1,5 +1,4 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import PropTypes from 'prop-types'
 
 import { Modal, FormInput, FormSelect } from '../../../../components'
 import { getInputFormattedTime } from '../../../../utils'
@@ -91,12 +90,6 @@ const EditMovieModal: React.FC<EditMovieModalProps> = (props) => {
       </div>
     </div>
   </Modal>
-}
-
-EditMovieModal.propTypes = {
-  visible: PropTypes.bool.isRequired,
-  closeModal: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
 }
 
 export default EditMovieModal
