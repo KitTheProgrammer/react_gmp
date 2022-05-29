@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './styles.scss'
+import { genreLabels as labels } from '../../../../GlobalConstants'
 
-const labels = ['ALL', 'DOCUMENTARY', 'COMEDY', 'HORROR', 'CRIME']
+import './styles.scss'
 
 export interface GenreMenuBarProps {
   genre: string

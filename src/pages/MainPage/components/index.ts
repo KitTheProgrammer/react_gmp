@@ -6,5 +6,7 @@ import TopBar from './TopBar/index.tsx'
 import SortMenu from './SortMenu/index.tsx'
 // @ts-ignore
 import Film from './Film/index.tsx'
+// @ts-ignore
+import EditMovieModal from './EditMovieModal/index.tsx'
 
-export { GenreMenuBar, TopBar, SortMenu, Film }
+export { GenreMenuBar, TopBar, SortMenu, Film, EditMovieModal }

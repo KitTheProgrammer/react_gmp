@@ -1,28 +1,31 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
+import { FilmData } from '../../../../components/Body'
+
 import './styles.scss'
 
 export interface FilmProps {
   imgHref: string
-  genre: string
+  genre: string[]
   title: string
   releaseDate: number
   index: number
   selected: boolean
-  onClick: React.Dispatch<React.SetStateAction<number>>
-  onEdit: (txt: string) => void
+  onClick: React.Dispatch<React.SetStateAction<FilmData>>
+  onEdit: () => void
   onDelete: (ind: number) => void
+  data: FilmData
 }
 
 const Film: React.FC<FilmProps> = (props) => {
-  const { imgHref, releaseDate, title, genre, index, selected, onClick, onDelete, onEdit } = props
+  const { imgHref, releaseDate, title, genre, index, selected, onClick, onDelete, onEdit, data } = props
 
   const [menuOpen, setMenuOpen] = useState(false)
 
   return <div
     className={`film${selected ? ' film-selected' : ''}`}
-    onClick={() => onClick(index)}
+    onClick={() => onClick(data)}
     role='button'
     tabIndex={0}
   >
@@ -48,24 +51,24 @@ const Film: React.FC<FilmProps> = (props) => {
           e.stopPropagation()
           setMenuOpen(false)
         }}
-      >x</button>
-      <button onClick={() => onEdit(title)}>Edit</button>
+      ><i className="fa-solid fa-xmark"/></button>
+      <button onClick={onEdit}>Edit</button>
       <button onClick={() => onDelete(index)}>Delete</button>
     </div>
     <img src={imgHref} alt={title}/>
     <div className={'film__info'}>
       <div className={'film__info__top'}>
         <h2>{title}</h2>
-        <h3>{releaseDate}</h3>
+        <h3>{new Date(releaseDate).getFullYear()}</h3>
       </div>
-      <span className={'film__info__bottom'}>{genre}</span>
+      <span className={'film__info__bottom'}>{genre.join(', ')}</span>
     </div>
   </div>
 }
 
 Film.propTypes = {
   imgHref: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
+  genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   title: PropTypes.string.isRequired,
   releaseDate: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
