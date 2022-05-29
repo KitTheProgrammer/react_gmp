@@ -1,5 +1,4 @@
 import React, {useCallback, useRef, useState} from 'react'
-import PropTypes from 'prop-types'
 
 import { useOnClickOutside } from '../../utils'
 
@@ -54,15 +53,6 @@ const FormSelect: React.FC<FormSelectProps> = (props) => {
       </div>
     </div>
   </div>
-}
-
-FormSelect.propTypes = {
-  label: PropTypes.string.isRequired,
-  value: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  placeholder: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-  data: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 }
 
 export default FormSelect

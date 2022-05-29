@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import { Film, TopBar } from '../../pages/MainPage/components'
 import { genreLabels } from '../../GlobalConstants'
@@ -31,29 +31,29 @@ const Body: React.FC<BodyProps> = (props) => {
 
   const [genre, setGenre] = useState(genreLabels[0])
   const [sortOption, setSortOption] = useState(0)
-
-  const filterOptionFunction = useCallback((films: FilmData[]) => {
+  
+  const currFilms = useMemo(() => {
+    let tempFilms = films
+    
     if (genre !== genreLabels[0]) {
-      films = films.filter((film) => film.genre.map((g) => g.toLowerCase()).includes(genre.toLowerCase()))
+      tempFilms = tempFilms.filter((film) => film.genre.map((g) => g.toLowerCase()).includes(genre.toLowerCase()))
     }
     switch (sortOption) {
       case 0: {
-        films = films.sort((a, b) => a.releaseDate - b.releaseDate)
+        tempFilms = tempFilms.sort((a, b) => a.releaseDate - b.releaseDate)
         break
       }
       case 1: {
-        films = films.sort(({ title: a }, { title: b }) => (a < b) ? -1 : (b < a) ? 1 : 0)
+        tempFilms = tempFilms.sort(({ title: a }, { title: b }) => (a < b) ? -1 : (b < a) ? 1 : 0)
         break
       }
       case 2: {
-        films = films.sort(({ title: a }, { title: b }) => (a < b) ? 1 : (b < a) ? -1 : 0)
+        tempFilms = tempFilms.sort(({ title: a }, { title: b }) => (a < b) ? 1 : (b < a) ? -1 : 0)
         break
       }
     }
-    return films
-  }, [ genre, sortOption ])
-
-  const currFilms = useMemo(() => filterOptionFunction(films), [filterOptionFunction, films])
+    return tempFilms
+  }, [films, genre, sortOption])
 
   return (
     <div className={'main-body'}>

@@ -1,5 +1,4 @@
 import React, {useCallback, useState} from 'react'
-import PropTypes from 'prop-types'
 
 import { Header, Body, Modal } from '../../components'
 import { FilmData } from '../../components/Body'
@@ -109,10 +108,6 @@ const MainPage = (): React.ReactElement => {
       </div>
     </div>
   )
-}
-
-MainPage.propTypes = {
-  testProp: PropTypes.string
 }
 
 export default MainPage

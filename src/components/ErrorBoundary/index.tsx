@@ -36,8 +36,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   render() {
     if (this.state.hasError) {
       return <div style={{ paddingLeft: '1rem' }}>
-        <h1>Something went wrong.</h1>
-        {this.state.errorData.errorInfo?.componentStack.split('\n').map((it) => (<><span>{it}</span><br/></>))}
+        <h1>Something went wrong. We are sowwy</h1>
       </div>
     }
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import './styles.scss'
 
@@ -22,13 +21,6 @@ const Modal: React.FC<ModalProps> = ({ visible, children, title, closeModal }) =
       </div>
     </div>
   </div>
-}
-
-Modal.propTypes = {
-  visible: PropTypes.bool.isRequired,
-  children: PropTypes.element.isRequired,
-  title: PropTypes.string.isRequired,
-  closeModal: PropTypes.func.isRequired,
 }
 
 export default Modal

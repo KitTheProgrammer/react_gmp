@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 
 import { FilmData } from '../../../../components/Body'
 
@@ -64,18 +63,6 @@ const Film: React.FC<FilmProps> = (props) => {
       <span className={'film__info__bottom'}>{genre.join(', ')}</span>
     </div>
   </div>
-}
-
-Film.propTypes = {
-  imgHref: PropTypes.string.isRequired,
-  genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  title: PropTypes.string.isRequired,
-  releaseDate: PropTypes.number.isRequired,
-  index: PropTypes.number.isRequired,
-  selected: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired,
 }
 
 export default Film

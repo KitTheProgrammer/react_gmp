@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import './styles.scss'
 
@@ -32,13 +31,6 @@ const FormInput: React.FC<FormInputProps> = (props) => {
         : <input type={type || ''} placeholder={placeholder} value={value} onChange={({ target: { value } }) => onChange(value)}/>
     }
   </div>
-}
-
-FormInput.propTypes = {
-  label: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
 }
 
 export default FormInput
