@@ -1,66 +1,40 @@
-import React, {useCallback, useMemo, useState} from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 
-import { TopBar, Film } from '../../pages/MainPage/components'
-// @ts-ignore
-import pulpFiction from '../../assets/images/Pulp_fiction.png'
-// @ts-ignore
-import bogRaps from '../../assets/images/bog_raps.png'
-// @ts-ignore
-import killBill from '../../assets/images/kill_bill.png'
+import { Film, TopBar } from '../../pages/MainPage/components'
+import { genreLabels } from '../../GlobalConstants'
 
 import './styles.scss'
 
-const genreLabels = ['ALL', 'DOCUMENTARY', 'COMEDY', 'HORROR', 'CRIME']
 const sortItems = ['RELEASE DATE', 'A-Z', 'Z-A']
 
-interface FilmData {
+export interface FilmData {
+  id: number
   imgHref: string
-  genre: string
+  genre: string[]
   title: string
   releaseDate: number
+  description?: string
+  rating?: number
+  runtime?: number
 }
 
-const filmsMocks: FilmData[] = [
-  {
-    title: 'Pulp Fiction',
-    genre: 'Action & Adventure, comedy',
-    releaseDate: 2004,
-    imgHref: pulpFiction,
-  },
-  {
-    title: 'Bohemian Rhapsody',
-    genre: 'Drama, Biography, horror',
-    releaseDate: 2003,
-    imgHref: bogRaps,
-  },
-  {
-    title: 'Kill Bill: Vol 2',
-    genre: 'Oscar winning movie, crime',
-    releaseDate: 1994,
-    imgHref: killBill,
-  },
-  {
-    title: 'Kill Bill: Vol 1',
-    genre: 'Oscar winning movie, crime',
-    releaseDate: 1993,
-    imgHref: killBill,
-  },
-  {
-    title: 'Kill Bill: Vol 0',
-    genre: 'Oscar winning movie, crime',
-    releaseDate: 1991,
-    imgHref: killBill,
-  },
-]
+export interface BodyProps {
+  films: FilmData[]
+  onEditVideo: () => void
+  onDeleteVideo: (ind: number) => void
+  selectedFilm: FilmData | null
+  setSelectedFilm: React.Dispatch<React.SetStateAction<any>>
+}
 
-const Body = () => {
+const Body: React.FC<BodyProps> = (props) => {
+  const { films, onEditVideo, onDeleteVideo, selectedFilm, setSelectedFilm } = props
+
   const [genre, setGenre] = useState(genreLabels[0])
   const [sortOption, setSortOption] = useState(0)
-  const [selectedFilm, setSelectedFilm] = useState(-1)
 
   const filterOptionFunction = useCallback((films: FilmData[]) => {
     if (genre !== genreLabels[0]) {
-      films = films.filter((film) => film.genre.toLowerCase().includes(genre.toLowerCase()))
+      films = films.filter((film) => film.genre.map((g) => g.toLowerCase()).includes(genre.toLowerCase()))
     }
     switch (sortOption) {
       case 0: {
@@ -79,10 +53,7 @@ const Body = () => {
     return films
   }, [ genre, sortOption ])
 
-  const currFilms = useMemo(() => filterOptionFunction(filmsMocks), [filterOptionFunction])
-
-  const deleteVideo = useCallback((ind: number) => alert(`delete video #${ind}`), [])
-  const editVideo = useCallback((txt: string) => alert(`edit video ${txt}`), [])
+  const currFilms = useMemo(() => filterOptionFunction(films), [filterOptionFunction, films])
 
   return (
     <div className={'main-body'}>
@@ -95,18 +66,19 @@ const Body = () => {
         filmsFound={currFilms.length}
       />
       <div className={'main-body__film-bar'}>
-        {currFilms.map(({ title, imgHref, releaseDate, genre }, index) => (
+        {currFilms.map((data) => (
           <Film
-            imgHref={imgHref}
-            genre={genre}
-            title={title}
-            releaseDate={releaseDate}
-            index={index}
+            imgHref={data.imgHref}
+            genre={data.genre}
+            title={data.title}
+            releaseDate={data.releaseDate}
+            index={data.id}
             onClick={setSelectedFilm}
-            selected={index === selectedFilm}
-            onEdit={editVideo}
-            onDelete={deleteVideo}
-            key={`${releaseDate}_${title}_${genre}_${index}`}
+            selected={data.id === selectedFilm?.id}
+            onEdit={onEditVideo}
+            onDelete={onDeleteVideo}
+            data={data}
+            key={`${data.releaseDate}_${data.title}_${genre}_${data.id}`}
           />
         ))}
       </div>

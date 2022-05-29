@@ -9,19 +9,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #555555;
   color: white;
-  overflow-x: hidden;
-  overflow-y: auto;
-
-  &::-webkit-scrollbar {
-    width: 5px;
-    background-color: $main-bg-color;
-    border: black 1px solid;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $main-button-color;
-    border-radius: 10px;
-  }
+  overflow: hidden;
 }
 
 code {
@@ -51,4 +39,8 @@ button, input[type="submit"], input[type="reset"] {
   cursor: pointer;
   outline: inherit;
   text-align: unset;
+
+  &:hover {
+    filter: brightness(130%);
+  }
 }

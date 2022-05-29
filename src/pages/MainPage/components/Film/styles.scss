@@ -2,11 +2,18 @@
 
 .film {
   margin-top: 1rem;
+  margin-right: 1.9rem;
   position: relative;
   cursor: pointer;
 
+  img {
+    width: 321px;
+    height: 455px;
+  }
+
   &:hover {
     background-color: $light-bg-color;
+    filter: unset;
   }
 
   &__menu {
@@ -115,11 +122,11 @@
 
         &:hover {
           background-color: $light-bg-color;
+          filter: unset;
         }
       }
 
       .film__menu__inner__close {
-        flex-grow: unset;
         align-self: flex-end;
       }
     }
