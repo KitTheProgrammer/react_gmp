@@ -52,7 +52,7 @@ const EditMovieModal: React.FC<EditMovieModalProps> = (props) => {
   return <Modal visible={visible} title={'edit movie'} closeModal={closeModal}>
     <div className={'edit-modal-form'}>
       <div className={'modal-form-row'}>
-        <FormInput label={'Title'} placeholder={'Title'} value={title || filmData?.title || ''} onChange={setTitle}/>
+        <FormInput label={'Title'} placeholder={'Title'} value={title} onChange={setTitle}/>
         <FormInput
           label={'Release date'}
           placeholder={'Release date'}

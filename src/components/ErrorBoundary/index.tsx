@@ -40,7 +40,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       </div>
     }
 
-    return this.props.children || <>Something terrible happened</>
+    return this.props.children
   }
 }
 

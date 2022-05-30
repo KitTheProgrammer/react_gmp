@@ -3,7 +3,7 @@
 .modal {
   display: none;
 
-  &__open {
+  &--open {
     position: absolute;
     display: flex;
     width: 100vw;
@@ -14,52 +14,52 @@
     justify-content: center;
     align-items: center;
     z-index: 100;
+  }
 
-    &__inner {
-      min-width: 686px;
-      width: 40vw;
-      min-height: 352px;
+  &__inner {
+    min-width: 686px;
+    width: 40vw;
+    min-height: 352px;
+    display: flex;
+    flex-direction: column;
+    background-color: $main-bg-color;
+    padding: 1.5rem 1.5rem;
+
+    &__header {
       display: flex;
       flex-direction: column;
-      background-color: $main-bg-color;
-      padding: 1.5rem 1.5rem;
+      min-height: 130px;
 
-      &__header {
+      &__close-button {
+        align-self: flex-end;
+        font-size: 40px;
+        width: 40px;
+        height: 40px;
         display: flex;
-        flex-direction: column;
-        min-height: 130px;
+        justify-content: center;
+        align-items: center;
 
-        &__close-button {
-          align-self: flex-end;
-          font-size: 40px;
-          width: 40px;
-          height: 40px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          &:hover {
-            background-color: $light-bg-color;
-            filter: unset;
-          }
-        }
-
-        span {
-          flex-grow: 1;
-          font-family: 'Montserrat';
-          font-style: normal;
-          font-weight: 300;
-          font-size: 40px;
-          line-height: 49px;
-          letter-spacing: 1px;
-          text-transform: uppercase;
+        &:hover {
+          background-color: $light-bg-color;
+          filter: unset;
         }
       }
 
-      &__body {
+      span {
         flex-grow: 1;
-        display: flex;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 40px;
+        line-height: 49px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
       }
+    }
+
+    &__body {
+      flex-grow: 1;
+      display: flex;
     }
   }
 }

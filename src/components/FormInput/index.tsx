@@ -14,12 +14,12 @@ export interface FormInputProps {
 const FormInput: React.FC<FormInputProps> = (props) => {
   const { label, placeholder, value, onChange, className, type } = props
 
-  return <div className={`main-form-input ${className || ''}`}>
-    <span>{label}</span>
-    {(type === 'textarea')
-      ? <textarea rows={2} placeholder={placeholder} value={value} onChange={({ target: { value } }) => onChange(value)}/>
-      : (type === 'number-type')
-        ? <input
+  const getInput = () => {
+    switch (type) {
+      case 'textarea':
+        return <textarea rows={2} placeholder={placeholder} value={value} onChange={({ target: { value } }) => onChange(value)}/>
+      case 'number-type':
+        return <input
           className={'number-type'}
           type={'number'}
           placeholder={`${(Number(value) > 60) ? `${Math.floor(Number(value) / 60)}h ${Number(value) % 60}min` : `${value}min`}`}
@@ -28,8 +28,14 @@ const FormInput: React.FC<FormInputProps> = (props) => {
             onChange(`${(Number(v) >= 1) ? Number(value) + 1 : Number(value) - 1}`)
           }}
         />
-        : <input type={type || ''} placeholder={placeholder} value={value} onChange={({ target: { value } }) => onChange(value)}/>
+      default:
+        return <input type={type || ''} placeholder={placeholder} value={value} onChange={({ target: { value } }) => onChange(value)}/>
     }
+  }
+
+  return <div className={`main-form-input ${className || ''}`}>
+    <span>{label}</span>
+    {getInput()}
   </div>
 }
 

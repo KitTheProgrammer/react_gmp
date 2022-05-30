@@ -27,11 +27,3 @@ export const useOnClickOutside = (ref: React.MutableRefObject<any>, handler: (e:
     [ref, handler]
   )
 }
-
-// export const getFormattedRuntime = (v: string | number) => {
-//   if (typeof v === 'string') {
-//     return v
-//   }
-//
-//
-// }

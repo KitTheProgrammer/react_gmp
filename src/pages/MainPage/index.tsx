@@ -14,10 +14,6 @@ import bogRaps from '../../assets/images/bog_raps.png'
 // @ts-ignore
 import killBill from '../../assets/images/kill_bill.png'
 
-export interface MainPageProps {
-  testProp: string
-}
-
 const MainPage = (): React.ReactElement => {
   const [selectedFilm, setSelectedFilm]: [any, React.Dispatch<React.SetStateAction<any>>] = useState(null)
   const [deleteModalVisible, setDeleteModalVisible] = useState(false)
@@ -63,22 +59,18 @@ const MainPage = (): React.ReactElement => {
     }
   }, [selectedFilm, filmsMocks, setFilmsMocks, setSelectedFilm])
 
-  const editVideo = useCallback(() => setEditMovieVisible(true), [])
-
   const submitEdit = useCallback((data: any) => {
     if (selectedFilm?.id) {
       setFilmsMocks(filmsMocks.map((f) => f.id === selectedFilm.id ? { ...f, ...data } : f))
     } else {
-      // @ts-ignore
-      console.log('test', Math.max(filmsMocks.map((i) => i.id)))
-      setFilmsMocks([ ...filmsMocks, { ...data, id: 1000 } ])
+      setFilmsMocks([ ...filmsMocks, { ...data, id: Math.max(...filmsMocks.map((i) => i.id)) + 1 } ])
     }
   }, [selectedFilm, filmsMocks])
 
-  const addNewFilm = useCallback(() => {
+  const addNewFilm = () => {
     setSelectedFilm(null)
     setEditMovieVisible(true)
-  }, [])
+  }
 
   return (
     <div className={'main-page'}>
@@ -99,7 +91,7 @@ const MainPage = (): React.ReactElement => {
       <Body
         films={filmsMocks}
         onDeleteVideo={() => setDeleteModalVisible(true)}
-        onEditVideo={editVideo}
+        onEditVideo={() => setEditMovieVisible(true)}
         selectedFilm={selectedFilm}
         setSelectedFilm={setSelectedFilm}
       />
