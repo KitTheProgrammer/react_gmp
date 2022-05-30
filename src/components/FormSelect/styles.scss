@@ -36,6 +36,10 @@
     align-items: center;
     color: white;
 
+    svg {
+      margin-left: auto;
+    }
+
     &__value {
       margin-left: 1rem;
     }
@@ -45,6 +49,10 @@
     }
 
     &__open {
+
+      svg {
+        transform: rotate(180deg);
+      }
 
       .main-form-select-panel {
         display: flex;

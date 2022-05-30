@@ -2,6 +2,8 @@ import React, {useCallback, useRef, useState} from 'react'
 
 //@ts-ignore
 import { useOnClickOutside } from '../../utils/index.ts'
+//@ts-ignore
+import { ArrowDown } from '../../assets/icons/index.tsx'
 
 import './styles.scss'
 
@@ -37,6 +39,7 @@ const FormSelect: React.FC<FormSelectProps> = (props) => {
       ref={selectRef}
     >
       <span className={'main-form-select__select__value'}>{value?.length ? value.join(', ') : placeholder}</span>
+      <ArrowDown/>
       <div className={'main-form-select-panel'}>
         {data.map((it) => {
           return <div className={'main-form-select-panel__item'} onClick={() => {
