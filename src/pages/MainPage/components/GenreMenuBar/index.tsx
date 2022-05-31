@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import './styles/styles.scss'
+import { genreLabels as labels } from '../../../../GlobalConstants'
 
-const labels = ['ALL', 'DOCUMENTARY', 'COMEDY', 'HORROR', 'CRIME']
+import './styles.scss'
 
-const GenreMenuBar = () => {
-  const [genre, setGenre] = useState(labels[0])
+export interface GenreMenuBarProps {
+  genre: string
+  setGenre: React.Dispatch<React.SetStateAction<string>>
+}
 
+const GenreMenuBar = ({ genre, setGenre }: GenreMenuBarProps): React.ReactElement => {
   return (<nav className={'genre-menu-bar genre-menu-bar__black'}>
     {labels.map((label) => (
       <button

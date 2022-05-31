@@ -1,15 +1,20 @@
-@import "./src/theme/constants";
+@import "../../../../theme/constants";
 
 .genre-menu-bar {
   position: relative;
   white-space: nowrap;
   background: #232323;
-  margin: 2em 0;
+  width: 40%;
+  min-width: 500px;
+  display: flex;
 
   &__item {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19.5px;
     display: inline-block;
     z-index: 10;
-    width: 20%;
     height: 100%;
     padding: 1em 0;
     text-align: center;
@@ -17,10 +22,12 @@
     background-color: unset;
     border: none;
     color: inherit;
-    border-bottom: #080707 solid 2px;
     transition: border-bottom 500ms ease;
+    flex-grow: 1;
+    text-transform: uppercase;
 
     &__underlined {
+      cursor: default;
       border-bottom: $main-button-color solid 2px;
     }
   }

@@ -1,0 +1,74 @@
+@import "src/theme/constants";
+
+.sort-menu {
+  height: inherit;
+  display: flex;
+  justify-content: space-between;
+  min-width: 15rem;
+
+  span {
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.5px;
+    align-self: center;
+    color: $light-bg-color;
+  }
+
+  .select {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: unset;
+    border: none;
+    color: white;
+    position: relative;
+    min-width: 150px;
+    cursor: pointer;
+
+    span {
+      color: white;
+      margin-left: 10px;
+    }
+
+    svg {
+      width: 8px;
+      height: 8px;
+    }
+
+    &__dropdown {
+      position: absolute;
+      top: 100%;
+      font-family: Montserrat;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19.5px;
+      background-color: unset;
+      border: #080707 solid 1px;
+      color: white;
+      display: none;
+
+      &__open {
+        display: flex;
+        flex-direction: column;
+        width: 99%;
+        height: 150%;
+      }
+
+      &__item {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+          background-color: $light-bg-color;
+          filter: unset;
+        }
+      }
+    }
+  }
+}
