@@ -28,10 +28,6 @@ export const useOnClickOutside = (ref: React.MutableRefObject<any>, handler: (e:
   )
 }
 
-// export const getFormattedRuntime = (v: string | number) => {
-//   if (typeof v === 'string') {
-//     return v
-//   }
-//
-//
-// }
+export const getTimeframeFormat = (value: number) => {
+  return `${(value > 60) ? `${Math.floor(value / 60)}h ${value % 60}min` : `${value}min`}`
+}

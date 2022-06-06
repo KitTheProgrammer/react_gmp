@@ -29,30 +29,35 @@ const MainPage = (): React.ReactElement => {
       genre: ['Comedy', 'Horror'],
       releaseDate: 1083801600000,
       imgHref: pulpFiction,
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     },
     {
       title: 'Bohemian Rhapsody',
       genre: ['Drama', 'Crime'],
       releaseDate: 1052179200000,
       imgHref: bogRaps,
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     },
     {
       title: 'Kill Bill: Vol 2',
       genre: ['Documentary'],
       releaseDate: 768182400000,
       imgHref: killBill,
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     },
     {
       title: 'Kill Bill: Vol 1',
       genre: ['Crime', 'Horror'],
       releaseDate: 736646400000,
       imgHref: killBill,
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     },
     {
       title: 'Kill Bill: Vol 0',
       genre: ['Documentary', 'Comedy'],
       releaseDate: 673488000000,
       imgHref: killBill,
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     },
   ].map((it, id) => ({ ...it, id })))
   const [editMovieVisible, setEditMovieVisible] = useState(false)
@@ -68,13 +73,14 @@ const MainPage = (): React.ReactElement => {
   const editVideo = useCallback(() => setEditMovieVisible(true), [])
 
   const submitEdit = useCallback((data: any) => {
-    if (selectedFilm?.id) {
+    if (selectedFilm?.id || selectedFilm?.id === 0) {
       setFilmsMocks(filmsMocks.map((f) => f.id === selectedFilm.id ? { ...f, ...data } : f))
     } else {
       // @ts-ignore
       console.log('test', Math.max(filmsMocks.map((i) => i.id)))
       setFilmsMocks([ ...filmsMocks, { ...data, id: 1000 } ])
     }
+    setSelectedFilm(null)
   }, [selectedFilm, filmsMocks])
 
   const addNewFilm = useCallback(() => {
@@ -97,7 +103,7 @@ const MainPage = (): React.ReactElement => {
         closeModal={() => setEditMovieVisible(false)}
         submitEdit={submitEdit}
       />
-      <Header addNewFilm={addNewFilm}/>
+      <Header addNewFilm={addNewFilm} close={() => setSelectedFilm(null)} selectedFilm={selectedFilm}/>
       <Body
         films={filmsMocks}
         onDeleteVideo={() => setDeleteModalVisible(true)}
