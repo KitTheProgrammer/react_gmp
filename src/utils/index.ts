@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import {number} from 'prop-types'
 
 export const getInputFormattedTime = (d: string | number) => {
   const date = new Date(d)
@@ -26,4 +27,8 @@ export const useOnClickOutside = (ref: React.MutableRefObject<any>, handler: (e:
     },
     [ref, handler]
   )
+}
+
+export const getTimeframeFormat = (value: number) => {
+  return `${(value > 60) ? `${Math.floor(value / 60)}h ${value % 60}min` : `${value}min`}`
 }
