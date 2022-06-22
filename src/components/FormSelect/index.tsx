@@ -1,18 +1,10 @@
-import React, {useCallback, useRef, useState} from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 
-import { useOnClickOutside } from '../../utils'
 import { ArrowDown } from '../../assets/icons'
+import { FormSelectProps } from '../../types'
 
 import './styles.scss'
-
-interface FormSelectProps {
-  label: string
-  value: string[]
-  placeholder: string
-  className?: string
-  onChange: (value: string[]) => void
-  data: string[]
-}
+import { useOnClickOutside } from '../../hooks'
 
 const FormSelect: React.FC<FormSelectProps> = (props) => {
   const { label, value, placeholder, className, onChange, data } = props

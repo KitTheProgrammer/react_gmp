@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import {number} from 'prop-types'
+import { GetFilmsParams } from '../types'
 
 export const getInputFormattedTime = (d: string | number) => {
   const date = new Date(d)
@@ -9,26 +8,17 @@ export const getInputFormattedTime = (d: string | number) => {
   return `${year}-${(month < 10) ? `0${month}` : month}-${(day < 10) ? `0${day}` : day}`
 }
 
-export const useOnClickOutside = (ref: React.MutableRefObject<any>, handler: (e: any) => void) => {
-  useEffect(
-    () => {
-      const listener = (event: any) => {
-        if (!ref.current || ref.current.contains(event.target)) {
-          return;
-        }
-        handler(event)
-      }
-      document.addEventListener("mousedown", listener);
-      document.addEventListener("touchstart", listener);
-      return () => {
-        document.removeEventListener("mousedown", listener);
-        document.removeEventListener("touchstart", listener);
-      }
-    },
-    [ref, handler]
-  )
-}
-
 export const getTimeframeFormat = (value: number) => {
   return `${(value > 60) ? `${Math.floor(value / 60)}h ${value % 60}min` : `${value}min`}`
 }
+
+export const getSortParams = (option: number): GetFilmsParams => {
+  switch (option) {
+    case (0): return { sortBy: 'release_date', sortOrder: 'desc' }
+    case (1): return { sortBy: 'title', sortOrder: 'asc' }
+    case (2): return { sortBy: 'title', sortOrder: 'desc' }
+    default: return { sortBy: 'release_date', sortOrder: 'desc' }
+  }
+}
+
+export const getGenreParams = (option: string): GetFilmsParams => ({ filter: [ option ] })

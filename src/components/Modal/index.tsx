@@ -1,13 +1,8 @@
 import React from 'react'
 
-import './styles.scss'
+import { ModalProps } from '../../types'
 
-export interface ModalProps {
-  visible: boolean
-  children: React.ReactNode
-  title: string
-  closeModal: () => void
-}
+import './styles.scss'
 
 const Modal: React.FC<ModalProps> = ({ visible, children, title, closeModal }) => {
   return <div className={`modal${(visible) ? ' modal--open' : ''}`}>

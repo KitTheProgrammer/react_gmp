@@ -1,17 +1,9 @@
 import React from 'react'
 
 import { getTimeframeFormat } from '../../utils'
+import { FormInputProps } from '../../types'
 
 import './styles.scss'
-
-export interface FormInputProps {
-  label: string
-  placeholder: string
-  value: string
-  onChange: (value: string) => void
-  type?: string
-  className?: string
-}
 
 const FormInput: React.FC<FormInputProps> = (props) => {
   const { label, placeholder, value, onChange, className, type } = props

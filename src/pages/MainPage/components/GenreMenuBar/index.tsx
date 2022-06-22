@@ -1,13 +1,9 @@
 import React from 'react'
 
 import { genreLabels as labels } from '../../../../GlobalConstants'
+import { GenreMenuBarProps } from '../../../../types'
 
 import './styles.scss'
-
-export interface GenreMenuBarProps {
-  genre: string
-  setGenre: React.Dispatch<React.SetStateAction<string>>
-}
 
 const GenreMenuBar = ({ genre, setGenre }: GenreMenuBarProps): React.ReactElement => {
   return (<nav className={'genre-menu-bar genre-menu-bar__black'}>
