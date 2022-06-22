@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { getTimeframeFormat } from '../../utils'
+
 import './styles.scss'
 
 export interface FormInputProps {
@@ -22,7 +24,7 @@ const FormInput: React.FC<FormInputProps> = (props) => {
         return <input
           className={'number-type'}
           type={'number'}
-          placeholder={`${(Number(value) > 60) ? `${Math.floor(Number(value) / 60)}h ${Number(value) % 60}min` : `${value}min`}`}
+          placeholder={getTimeframeFormat(Number(value))}
           min={0} value={''}
           onChange={({ target: { value: v } }) => {
             onChange(`${(Number(v) >= 1) ? Number(value) + 1 : Number(value) - 1}`)
