@@ -1,10 +1,10 @@
 import React from 'react'
 import { FilmData, GetFilmsParams, MovieDataFromServer } from '../types'
-import { get, getParamsString } from './utils'
+import { getMethod, getParamsString } from './utils'
 import { setFilms } from '../redux/reducers/films'
 
 export const getFilms = (params: GetFilmsParams | null = null) => async (dispatch: React.Dispatch<any>) => {
-    const res = await get(`movies${(params) ? `?${getParamsString(params)}` : ''}`)
+    const res = await getMethod(`movies${(params) ? `?${getParamsString(params)}` : ''}`)
     if (res.status === 200) {
         const data: { data: MovieDataFromServer[] } = await res.json()
         const formattedData: FilmData[] = data.data.map((m) => ({

@@ -1,4 +1,6 @@
 import { GetFilmsParams } from '../types'
+import { sortEntries } from '../GlobalConstants'
+import { SORT_ALPHABET, SORT_ALPHABET_REVERSE, SORT_RELEASE } from './i18n'
 
 export const getInputFormattedTime = (d: string | number) => {
   const date = new Date(d)
@@ -14,9 +16,9 @@ export const getTimeframeFormat = (value: number) => {
 
 export const getSortParams = (option: number): GetFilmsParams => {
   switch (option) {
-    case (0): return { sortBy: 'release_date', sortOrder: 'desc' }
-    case (1): return { sortBy: 'title', sortOrder: 'asc' }
-    case (2): return { sortBy: 'title', sortOrder: 'desc' }
+    case (sortEntries[SORT_RELEASE]): return { sortBy: 'release_date', sortOrder: 'desc' }
+    case (sortEntries[SORT_ALPHABET]): return { sortBy: 'title', sortOrder: 'asc' }
+    case (sortEntries[SORT_ALPHABET_REVERSE]): return { sortBy: 'title', sortOrder: 'desc' }
     default: return { sortBy: 'release_date', sortOrder: 'desc' }
   }
 }

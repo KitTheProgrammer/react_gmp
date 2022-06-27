@@ -1,6 +1,6 @@
 const defaultApiEndpoint = 'http://localhost:4000'
 
-export const get = async (endpoint: string): Promise<any> => {
+export const getMethod = async (endpoint: string): Promise<any> => {
   return await fetch(`${defaultApiEndpoint}/${endpoint}`, {
     method: 'get',
     headers: {
@@ -9,7 +9,7 @@ export const get = async (endpoint: string): Promise<any> => {
   })
 }
 
-export const post = async (endpoint: string, body: any): Promise<any> => {
+export const postMethod = async (endpoint: string, body: any): Promise<any> => {
   return await fetch(`${defaultApiEndpoint}/${endpoint}`, {
     method: 'post',
     headers: {
@@ -19,7 +19,7 @@ export const post = async (endpoint: string, body: any): Promise<any> => {
   })
 }
 
-export const put = async (endpoint: string, body: any): Promise<any> => {
+export const putMethod = async (endpoint: string, body: any): Promise<any> => {
   return await fetch(`${defaultApiEndpoint}/${endpoint}`, {
     method: 'put',
     headers: {
@@ -29,7 +29,7 @@ export const put = async (endpoint: string, body: any): Promise<any> => {
   })
 }
 
-export const deleteMeth = async (endpoint: string, body: any): Promise<any> => {
+export const deleteMethod = async (endpoint: string, body: any): Promise<any> => {
   return await fetch(`${defaultApiEndpoint}/${endpoint}`, {
     method: 'delete',
     headers: {

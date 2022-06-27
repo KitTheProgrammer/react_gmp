@@ -1,0 +1,8 @@
+export const GENRE_ALL = 'All'
+export const GENRE_DOCUMENTARY = 'Documentary'
+export const GENRE_COMEDY = 'Comedy'
+export const GENRE_HORROR = 'Horror'
+export const GENRE_CRIME = 'CRIME'
+export const SORT_RELEASE = 'RELEASE DATE'
+export const SORT_ALPHABET = 'A-Z'
+export const SORT_ALPHABET_REVERSE = 'Z-A'

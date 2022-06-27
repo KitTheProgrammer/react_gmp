@@ -6,8 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks'
 import { setGenreOption, setSortOption } from '../../actions'
 
 import './styles.scss'
-
-const sortItems = ['RELEASE DATE', 'A-Z', 'Z-A']
+import { sortItems } from '../../GlobalConstants'
 
 const Body: React.FC<BodyProps> = (props) => {
   const dispatch = useAppDispatch()
@@ -21,9 +20,9 @@ const Body: React.FC<BodyProps> = (props) => {
     <div className={'main-body'}>
       <TopBar
         genre={genre}
-        setGenre={(g) => dispatch(setGenreOption(g))}
+        setGenre={(genre) => dispatch(setGenreOption(genre))}
         currentSortItem={sortOption}
-        setSortItem={(o) => dispatch(setSortOption(o))}
+        setSortItem={(option) => dispatch(setSortOption(option))}
         sortItems={sortItems}
         filmsFound={films.length}
       />
