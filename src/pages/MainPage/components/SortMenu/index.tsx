@@ -1,14 +1,9 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 
 import { ArrowDown } from '../../../../assets/icons'
+import { SortMenuProps } from '../../../../types'
 
 import './styles.scss'
-
-export interface SortMenuProps {
-  sortItems: string[]
-  currentSortItem: number
-  setSortItem: React.Dispatch<React.SetStateAction<number>>
-}
 
 const SortMenu: React.FC<SortMenuProps> = ({ sortItems, currentSortItem, setSortItem }) => {
   const [isOpen, setIsOpen] = useState(false)

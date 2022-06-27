@@ -1,19 +1,11 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
-import { Modal, FormInput, FormSelect } from '../../../../components'
+import { FormInput, FormSelect, Modal } from '../../../../components'
 import { getInputFormattedTime } from '../../../../utils'
-import { FilmData } from '../../../../components/Body'
 import { genreLabels } from '../../../../GlobalConstants'
 
 import './styles.scss'
-
-export interface EditMovieModalProps {
-  visible: boolean
-  title: string
-  closeModal: () => void
-  filmData?: FilmData | null
-  submitEdit: (data: any) => void
-}
+import {EditMovieModalProps} from '../../../../types'
 
 const EditMovieModal: React.FC<EditMovieModalProps> = (props) => {
   const { visible, closeModal, filmData, submitEdit } = props

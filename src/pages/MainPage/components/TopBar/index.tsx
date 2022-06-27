@@ -1,14 +1,9 @@
 import React from 'react'
 
 import { GenreMenuBar, SortMenu } from '../index'
-import { GenreMenuBarProps } from '../GenreMenuBar'
-import { SortMenuProps } from '../SortMenu'
+import { TopBarProps } from '../../../../types'
 
 import './styles.scss'
-
-export interface TopBarProps extends GenreMenuBarProps, SortMenuProps {
-  filmsFound: number
-}
 
 const TopBar: React.FC<TopBarProps> = (props) => {
   const { genre, setGenre, currentSortItem, sortItems, setSortItem, filmsFound } = props

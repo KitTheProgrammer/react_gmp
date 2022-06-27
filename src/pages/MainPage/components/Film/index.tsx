@@ -1,21 +1,8 @@
 import React, { useState } from 'react'
 
-import { FilmData } from '../../../../components/Body'
+import { FilmProps } from '../../../../types'
 
 import './styles.scss'
-
-export interface FilmProps {
-  imgHref: string
-  genre: string[]
-  title: string
-  releaseDate: number
-  index: number
-  selected: boolean
-  onClick: React.Dispatch<React.SetStateAction<FilmData>>
-  onEdit: () => void
-  onDelete: (ind: number) => void
-  data: FilmData
-}
 
 const Film: React.FC<FilmProps> = (props) => {
   const { imgHref, releaseDate, title, genre, index, selected, onClick, onDelete, onEdit, data } = props
@@ -54,7 +41,9 @@ const Film: React.FC<FilmProps> = (props) => {
       <button onClick={onEdit}>Edit</button>
       <button onClick={() => onDelete(index)}>Delete</button>
     </div>
-    <img src={imgHref} alt={title}/>
+    <div className={'film__image-wrapper'}>
+      <img src={imgHref} alt={title}/>
+    </div>
     <div className={'film__info'}>
       <div className={'film__info__top'}>
         <h2>{title}</h2>

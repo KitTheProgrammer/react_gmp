@@ -1,16 +1,10 @@
 import React from 'react'
 
-import { SearchBar, AddMovieButton } from '../index'
-import { FilmData } from '../Body'
+import { AddMovieButton, SearchBar } from '../index'
 import { getTimeframeFormat } from '../../utils'
+import { HeaderProps } from '../../types'
 
 import './styles.scss'
-
-export interface HeaderProps {
-  addNewFilm: () => void
-  selectedFilm: FilmData | null
-  close: () => void
-}
 
 const Header: React.FC<HeaderProps> = ({ addNewFilm, selectedFilm, close }) => (
   <div className={`header${(selectedFilm) ? ' header--film' : ''}`}>

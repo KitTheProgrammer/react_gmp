@@ -1,80 +1,45 @@
-import React, {useCallback, useState} from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { Header, Body, Modal } from '../../components'
-import { FilmData } from '../../components/Body'
-
 import { EditMovieModal } from './components'
+import { useAppDispatch, useAppSelector } from '../../hooks'
+import { setFilms, setSelectedFilm } from '../../redux/reducers/films'
 
 import './styles.scss'
-
-// @ts-ignore
-import pulpFiction from '../../assets/images/Pulp_fiction.png'
-// @ts-ignore
-import bogRaps from '../../assets/images/bog_raps.png'
-// @ts-ignore
-import killBill from '../../assets/images/kill_bill.png'
+import { getFilms } from '../../api'
 
 const MainPage = (): React.ReactElement => {
-  const [selectedFilm, setSelectedFilm]: [any, React.Dispatch<React.SetStateAction<any>>] = useState(null)
-  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
-  const [filmsMocks, setFilmsMocks] = useState((): FilmData[] => [
-    {
-      title: 'Pulp Fiction',
-      genre: ['Comedy', 'Horror'],
-      releaseDate: 1083801600000,
-      imgHref: pulpFiction,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-    {
-      title: 'Bohemian Rhapsody',
-      genre: ['Drama', 'Crime'],
-      releaseDate: 1052179200000,
-      imgHref: bogRaps,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-    {
-      title: 'Kill Bill: Vol 2',
-      genre: ['Documentary'],
-      releaseDate: 768182400000,
-      imgHref: killBill,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-    {
-      title: 'Kill Bill: Vol 1',
-      genre: ['Crime', 'Horror'],
-      releaseDate: 736646400000,
-      imgHref: killBill,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-    {
-      title: 'Kill Bill: Vol 0',
-      genre: ['Documentary', 'Comedy'],
-      releaseDate: 673488000000,
-      imgHref: killBill,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-  ].map((it, id) => ({ ...it, id })))
-  const [editMovieVisible, setEditMovieVisible] = useState(false)
+  const dispatch = useAppDispatch()
 
+  const films = useAppSelector(({ films }) => films.films)
+  const selectedFilm = useAppSelector(({ films }) => films.selectedFilm)
+  
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
+  const [editMovieVisible, setEditMovieVisible] = useState(false)
+  
+  useEffect(() => {
+    dispatch(getFilms({ sortBy: 'release_date', sortOrder: 'desc' }))
+  }, [dispatch])
+  
   const deleteVideo = useCallback(() => {
     if (selectedFilm !== null) {
-      setFilmsMocks(filmsMocks.filter(({id}) => id !== selectedFilm.id))
-      setSelectedFilm(null)
+      dispatch(setFilms(films.filter(({id}) => id !== selectedFilm.id)))
+      dispatch(setSelectedFilm(null))
       setDeleteModalVisible(false)
     }
-  }, [selectedFilm, filmsMocks, setFilmsMocks, setSelectedFilm])
+  }, [selectedFilm, films, dispatch])
 
   const submitEdit = useCallback((data: any) => {
     if (selectedFilm?.id || selectedFilm?.id === 0) {
-      setFilmsMocks(filmsMocks.map((f) => f.id === selectedFilm.id ? { ...f, ...data } : f))
+      dispatch(setFilms(films.map((f) => f.id === selectedFilm.id ? { ...f, ...data } : f)))
     } else {
-      setFilmsMocks([ ...filmsMocks, { ...data, id: Math.max(...filmsMocks.map((i) => i.id)) + 1 } ])
+      dispatch(setFilms([ ...films, { ...data, id: Math.max(...films.map((i) => i.id)) + 1 } ]))
     }
-    setSelectedFilm(null)
-  }, [selectedFilm, filmsMocks])
+    dispatch(setSelectedFilm(null))
+  }, [selectedFilm, films, dispatch])
 
   const addNewFilm = () => {
-    setSelectedFilm(null)
+    dispatch(setSelectedFilm(null))
     setEditMovieVisible(true)
   }
 
@@ -93,13 +58,13 @@ const MainPage = (): React.ReactElement => {
         closeModal={() => setEditMovieVisible(false)}
         submitEdit={submitEdit}
       />
-      <Header addNewFilm={addNewFilm} close={() => setSelectedFilm(null)} selectedFilm={selectedFilm}/>
+      <Header addNewFilm={addNewFilm} close={() => dispatch(setSelectedFilm(null))} selectedFilm={selectedFilm}/>
       <Body
-        films={filmsMocks}
+        films={films}
         onDeleteVideo={() => setDeleteModalVisible(true)}
         onEditVideo={() => setEditMovieVisible(true)}
         selectedFilm={selectedFilm}
-        setSelectedFilm={setSelectedFilm}
+        setSelectedFilm={(film) => dispatch(setSelectedFilm(film))}
       />
       <div className={'main-page__footer'}>
         <span className={'main-logo'}><b>netflix</b>roulette</span>
