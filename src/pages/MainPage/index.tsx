@@ -3,10 +3,10 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Header, Body, Modal } from '../../components'
 import { EditMovieModal } from './components'
 import { useAppDispatch, useAppSelector } from '../../hooks'
-import { setFilms, setSelectedFilm } from '../../redux/reducers/films'
+import { setSelectedFilm } from '../../redux/reducers/films'
+import { createFilm, deleteFilm, getFilms, updateFilms } from '../../api'
 
 import './styles.scss'
-import { getFilms } from '../../api'
 
 const MainPage = (): React.ReactElement => {
   const dispatch = useAppDispatch()
@@ -23,20 +23,20 @@ const MainPage = (): React.ReactElement => {
   
   const deleteVideo = useCallback(() => {
     if (selectedFilm !== null) {
-      dispatch(setFilms(films.filter(({id}) => id !== selectedFilm.id)))
+      dispatch(deleteFilm(selectedFilm.id))
       dispatch(setSelectedFilm(null))
       setDeleteModalVisible(false)
     }
-  }, [selectedFilm, films, dispatch])
+  }, [selectedFilm, dispatch])
 
   const submitEdit = useCallback((data: any) => {
     if (selectedFilm?.id || selectedFilm?.id === 0) {
-      dispatch(setFilms(films.map((f) => f.id === selectedFilm.id ? { ...f, ...data } : f)))
+      dispatch(updateFilms({ ...selectedFilm, ...data}))
     } else {
-      dispatch(setFilms([ ...films, { ...data, id: Math.max(...films.map((i) => i.id)) + 1 } ]))
+      dispatch(createFilm(data))
     }
     dispatch(setSelectedFilm(null))
-  }, [selectedFilm, films, dispatch])
+  }, [selectedFilm, dispatch])
 
   const addNewFilm = () => {
     dispatch(setSelectedFilm(null))

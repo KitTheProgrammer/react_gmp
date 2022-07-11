@@ -9,6 +9,10 @@ export interface FilmData {
   description?: string
   rating?: number
   runtime?: number
+  tagline?: string
+  vote_count?: number
+  budget?: number
+  revenue?: number
 }
 
 export interface BodyProps {
@@ -65,20 +69,20 @@ export interface SortMenuProps {
 
 export interface FormSelectProps {
   label: string
-  value: string[]
+  // value: string[]
   placeholder: string
   className?: string
-  onChange: (value: string[]) => void
+  // onChange: (value: string[]) => void
   data: string[]
+  name: string
 }
 
 export interface FormInputProps {
   label: string
   placeholder: string
-  value: string
-  onChange: (value: string) => void
   type?: string
   className?: string
+  name: string
 }
 
 export interface ModalProps {

@@ -31,10 +31,37 @@ export const filmsSlice = createSlice({
     },
     setSelectedSortOption: (state, action: PayloadAction<number>) => {
       state.selectedSortOption = action.payload
+    },
+    updateFilm: (state, action: PayloadAction<FilmData>) => {
+      const { payload } = action
+      const filmsCopy = [...state.films]
+      const filmInd = filmsCopy.findIndex((it) => it.id === payload.id)
+      if (filmInd !== -1) {
+        filmsCopy.splice(filmInd, 1, payload)
+        state.films = filmsCopy
+      } else {
+        state.films = [...filmsCopy, payload]
+      }
+    },
+    deleteFilm: (state, action: PayloadAction<number>) => {
+      const { payload } = action
+      const filmsCopy = [...state.films]
+      const filmInd = filmsCopy.findIndex((it) => it.id === payload)
+      if (filmInd !== -1) {
+        filmsCopy.splice(filmInd, 0)
+        state.films = filmsCopy
+      }
     }
   }
 })
 
-export const { setFilms, setSelectedFilm, setSelectedGenre, setSelectedSortOption } = filmsSlice.actions
+export const {
+  setFilms,
+  setSelectedFilm,
+  setSelectedGenre,
+  setSelectedSortOption,
+  updateFilm,
+  deleteFilm
+} = filmsSlice.actions
 
 export default filmsSlice.reducer

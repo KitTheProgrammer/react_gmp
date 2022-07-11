@@ -5,24 +5,29 @@ import { FormSelectProps } from '../../types'
 
 import './styles.scss'
 import { useOnClickOutside } from '../../hooks'
+import { useField } from 'formik'
 
 const FormSelect: React.FC<FormSelectProps> = (props) => {
-  const { label, value, placeholder, className, onChange, data } = props
+  const { label, placeholder, className, data, name } = props
   const [isOpen, setIsOpen] = useState(false)
+  const [field, meta, helpers] = useField(name)
+  const { value } = meta
+  const { setValue } = helpers
   const selectRef = useRef(null)
 
   useOnClickOutside(selectRef, () => setIsOpen(false))
   
   const handleChange = useCallback((val: string) => {
     if (value.includes(val)) {
-      onChange(value.filter((it) => it.toLowerCase() !== val.toLowerCase()))
+      setValue(value.filter((it: string) => it.toLowerCase() !== val.toLowerCase()))
     } else {
-      onChange([ ...value, val ])
+      setValue([ ...value, val ])
     }
-  }, [onChange, value])
+  }, [setValue, value])
 
-  return <div className={`main-form-select ${className}`}>
+  return <div className={`main-form-select ${className || ''}`}>
     <span className={'main-form-select__label'}>{label}</span>
+    {meta.error && meta.touched && <div>{meta.error}</div>}
     <div
       className={`main-form-select__select${(isOpen) ? ' main-form-select__select__open' : ''}`}
       onClick={() => setIsOpen(!isOpen)}
@@ -31,15 +36,16 @@ const FormSelect: React.FC<FormSelectProps> = (props) => {
       <span className={'main-form-select__select__value'}>{value?.length ? value.join(', ') : placeholder}</span>
       <ArrowDown/>
       <div className={'main-form-select-panel'}>
-        {data.map((it) => {
+        {data.map((it, ind) => {
           return <div className={'main-form-select-panel__item'} onClick={() => {
             handleChange(it)
             setIsOpen(true)
-          }}>
+          }} key={`selectOption_${ind}_${it}`}>
             <input
+              {...field}
               type={'checkbox'}
-              checked={value.map((v) => v.toLowerCase()).includes(it.toLowerCase())}
-              onClick={() => handleChange(it)}
+              checked={value.map((v: string) => v.toLowerCase()).includes(it.toLowerCase())}
+              onChange={() => handleChange(it)}
             />
             <span>{it}</span>
           </div>

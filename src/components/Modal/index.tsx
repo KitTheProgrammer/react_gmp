@@ -12,7 +12,7 @@ const Modal: React.FC<ModalProps> = ({ visible, children, title, closeModal }) =
         <span>{title}</span>
       </div>
       <div className={'modal__inner__body'}>
-        {children}
+        {visible ? children : null}
       </div>
     </div>
   </div>
