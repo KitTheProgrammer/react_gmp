@@ -7,6 +7,7 @@ interface FilmsState {
   selectedFilm: FilmData | null
   selectedGenre: string
   selectedSortOption: number
+  error: { error: boolean, errorMessage: string }
 }
 
 const initialState: FilmsState = {
@@ -14,6 +15,7 @@ const initialState: FilmsState = {
   selectedFilm: null,
   selectedGenre: genreLabels[0],
   selectedSortOption: 0,
+  error: { error: false, errorMessage: '' }
 }
 
 export const filmsSlice = createSlice({
@@ -37,7 +39,7 @@ export const filmsSlice = createSlice({
       const filmsCopy = [...state.films]
       const filmInd = filmsCopy.findIndex((it) => it.id === payload.id)
       if (filmInd !== -1) {
-        filmsCopy.splice(filmInd, 1, payload)
+        filmsCopy[filmInd] = payload
         state.films = filmsCopy
       } else {
         state.films = [...filmsCopy, payload]
@@ -51,6 +53,9 @@ export const filmsSlice = createSlice({
         filmsCopy.splice(filmInd, 0)
         state.films = filmsCopy
       }
+    },
+    setError: (state, action: PayloadAction<FilmsState['error']>) => {
+      state.error = action.payload
     }
   }
 })
@@ -61,7 +66,8 @@ export const {
   setSelectedGenre,
   setSelectedSortOption,
   updateFilm,
-  deleteFilm
+  deleteFilm,
+  setError,
 } = filmsSlice.actions
 
 export default filmsSlice.reducer

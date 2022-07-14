@@ -13,7 +13,7 @@ const FormInput: React.FC<FormInputProps> = (props) => {
   const { value } = meta
   const { setValue } = helpers
 
-  const getInput = () => {
+  const getInput = (type?: string) => {
     switch (type) {
       case 'textarea':
         return <textarea
@@ -56,7 +56,7 @@ const FormInput: React.FC<FormInputProps> = (props) => {
   return <div className={`main-form-input ${className || ''}`}>
     <span>{label}</span>
     {meta.error && meta.touched && <div>{meta.error}</div>}
-    {getInput()}
+    {getInput(type)}
   </div>
 }
 
