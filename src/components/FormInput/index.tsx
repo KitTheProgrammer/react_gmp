@@ -1,35 +1,62 @@
 import React from 'react'
+import { useField } from 'formik'
 
-import { getTimeframeFormat } from '../../utils'
+import { getInputFormattedTime, getTimeframeFormat } from '../../utils'
 import { FormInputProps } from '../../types'
 
 import './styles.scss'
 
 const FormInput: React.FC<FormInputProps> = (props) => {
-  const { label, placeholder, value, onChange, className, type } = props
+  const { label, placeholder, className, type, name } = props
 
-  const getInput = () => {
+  const [field, meta, helpers] = useField(name)
+  const { value } = meta
+  const { setValue } = helpers
+
+  const getInput = (type?: string) => {
     switch (type) {
       case 'textarea':
-        return <textarea rows={2} placeholder={placeholder} value={value} onChange={({ target: { value } }) => onChange(value)}/>
+        return <textarea
+          {...field}
+          rows={2}
+          placeholder={placeholder}
+          value={value}
+          onChange={({ target: { value } }) => setValue(value)}
+        />
       case 'number-type':
         return <input
+          {...field}
           className={'number-type'}
           type={'number'}
           placeholder={getTimeframeFormat(Number(value))}
           min={0} value={''}
           onChange={({ target: { value: v } }) => {
-            onChange(`${(Number(v) >= 1) ? Number(value) + 1 : Number(value) - 1}`)
+            setValue(`${(Number(v) >= 1) ? Number(value) + 1 : Number(value) - 1}`)
           }}
         />
+      case 'date':
+        return <input
+          {...field}
+          type={type || ''}
+          placeholder={placeholder}
+          value={getInputFormattedTime(value)}
+          onChange={({ target: { value } }) => setValue(value)}
+        />
       default:
-        return <input type={type || ''} placeholder={placeholder} value={value} onChange={({ target: { value } }) => onChange(value)}/>
+        return <input
+          {...field}
+          type={type || ''}
+          placeholder={placeholder}
+          value={value}
+          onChange={({ target: { value } }) => setValue(value)}
+        />
     }
   }
 
   return <div className={`main-form-input ${className || ''}`}>
     <span>{label}</span>
-    {getInput()}
+    {meta.error && meta.touched && <div>{meta.error}</div>}
+    {getInput(type)}
   </div>
 }
 

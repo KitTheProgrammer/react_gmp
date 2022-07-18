@@ -18,7 +18,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   componentDidCatch(error: any, errorInfo: { componentStack: string }) {
-    console.log(error, errorInfo)
+    console.info(error, errorInfo)
     this.setState({ errorData: { error, errorInfo } })
   }
 
