@@ -16,10 +16,10 @@ export const getTimeframeFormat = (value: number) => {
 
 export const getSortParams = (option: number): GetFilmsParams => {
   switch (option) {
-    case (sortEntries[SORT_RELEASE]): return { sortBy: 'release_date', sortOrder: 'desc' }
-    case (sortEntries[SORT_ALPHABET]): return { sortBy: 'title', sortOrder: 'asc' }
-    case (sortEntries[SORT_ALPHABET_REVERSE]): return { sortBy: 'title', sortOrder: 'desc' }
-    default: return { sortBy: 'release_date', sortOrder: 'desc' }
+  case (sortEntries[SORT_RELEASE]): return { sortBy: 'release_date', sortOrder: 'desc' }
+  case (sortEntries[SORT_ALPHABET]): return { sortBy: 'title', sortOrder: 'asc' }
+  case (sortEntries[SORT_ALPHABET_REVERSE]): return { sortBy: 'title', sortOrder: 'desc' }
+  default: return { sortBy: 'release_date', sortOrder: 'desc' }
   }
 }
 

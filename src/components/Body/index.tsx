@@ -2,19 +2,20 @@ import React from 'react'
 
 import { Film, TopBar } from '../../pages/MainPage/components'
 import { BodyProps } from '../../types'
-import { useAppDispatch, useAppSelector } from '../../hooks'
+import { useAppDispatch, useAppSelector, useQuery } from '../../hooks'
 import { setGenreOption, setSortOption } from '../../actions'
 
 import './styles.scss'
-import { sortItems } from '../../GlobalConstants'
+import { genreLabels, sortItems } from '../../GlobalConstants'
 
 const Body: React.FC<BodyProps> = (props) => {
   const dispatch = useAppDispatch()
 
   const { films, onEditVideo, onDeleteVideo, selectedFilm, setSelectedFilm } = props
 
-  const sortOption = useAppSelector(({ films }) => films.selectedSortOption)
-  const genre = useAppSelector(({ films }) => films.selectedGenre)
+  const query = useQuery()
+  const genre = query.get('genre') || genreLabels[0]
+  const sortOption = Number(query.get('sortBy')) || 0
 
   return (
     <div className={'main-body'}>

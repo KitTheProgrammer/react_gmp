@@ -25,8 +25,13 @@ export const filmsSlice = createSlice({
     setFilms: (state, action: PayloadAction<FilmData[]>) => {
       state.films = action.payload
     },
-    setSelectedFilm: (state, action: PayloadAction<FilmData | null>) => {
-      state.selectedFilm = action.payload
+    setSelectedFilm: (state, action: PayloadAction<FilmData | number | null>) => {
+      if (typeof action?.payload === 'number') {
+        const currFilm = state.films.find((film) => Number(film.id) === action.payload)
+        if (currFilm) state.selectedFilm = currFilm
+      } else {
+        state.selectedFilm = action.payload
+      }
     },
     setSelectedGenre: (state, action: PayloadAction<string>) => {
       state.selectedGenre = action.payload

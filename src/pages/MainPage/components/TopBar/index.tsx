@@ -4,7 +4,6 @@ import { GenreMenuBar, SortMenu } from '../index'
 import { TopBarProps } from '../../../../types'
 
 import './styles.scss'
-
 const TopBar: React.FC<TopBarProps> = (props) => {
   const { genre, setGenre, currentSortItem, sortItems, setSortItem, filmsFound } = props
 

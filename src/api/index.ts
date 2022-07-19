@@ -39,12 +39,10 @@ export const createFilm = (params: FilmData) => async (dispatch: React.Dispatch<
       const data: MovieDataFromServer = await res.json()
       dispatch(updateFilms(movieToFilm(data)))
       return true
-    } else {
-      dispatch(setError({ error: true, errorMessage: 'Error at creating the movie (server error)' }))
     }
     return false
   } catch (err) {
-    dispatch(setError({ error: true, errorMessage: `Error at creating the movie; ${err}` }))
+    dispatch(setError({ error: true, errorMessage: `Error at creating the movie (in catch); ${err}` }))
   }
 }
 
