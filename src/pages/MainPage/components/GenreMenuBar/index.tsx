@@ -1,13 +1,12 @@
 import React from 'react'
 
 import { genreLabels, genreLabels as labels } from '../../../../GlobalConstants'
-import { GenreMenuBarProps } from '../../../../types'
 
 import './styles.scss'
 import { useQuery } from '../../../../hooks'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const GenreMenuBar = ({ setGenre }: GenreMenuBarProps): React.ReactElement => {
+const GenreMenuBar = (): React.ReactElement => {
   const query = useQuery()
   const currGenre = query.get('genre') || genreLabels[0]
   const navigate = useNavigate()
@@ -18,7 +17,6 @@ const GenreMenuBar = ({ setGenre }: GenreMenuBarProps): React.ReactElement => {
       query.set('genre', String(genre))
     }
     navigate(`${pathname}?${query.toString()}`, { replace: true })
-    setGenre(genre)
   }
 
   return (<nav className={'genre-menu-bar genre-menu-bar__black'}>

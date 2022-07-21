@@ -9,12 +9,16 @@ import { useNavigate } from 'react-router-dom'
 import { FilmData } from '../../types'
 
 import './styles.scss'
+import { genreLabels } from '../../GlobalConstants'
+import { setSearchOptions } from '../../actions'
 
 const MainPage = (): React.ReactElement => {
   const dispatch = useAppDispatch()
   const query = useQuery()
   const navigate = useNavigate()
   const movie = query.get('movie')
+  const genre = query.get('genre') || genreLabels[0]
+  const sortOption = Number(query.get('sortBy')) || 0
 
   const films = useAppSelector(({ films }) => films.films)
   const selectedFilm = useAppSelector(({ films }) => films.selectedFilm)
@@ -22,10 +26,10 @@ const MainPage = (): React.ReactElement => {
 
   const [deleteModalVisible, setDeleteModalVisible] = useState(false)
   const [editMovieVisible, setEditMovieVisible] = useState(false)
-  
+
   useEffect(() => {
-    dispatch(getFilms({ sortBy: 'release_date', sortOrder: 'desc' }))
-  }, [dispatch])
+    dispatch(setSearchOptions(genre, sortOption))
+  }, [dispatch, genre, sortOption])
 
   useEffect(() => {
     dispatch(setSelectedFilm(Number(movie)))
@@ -98,6 +102,8 @@ const MainPage = (): React.ReactElement => {
         onEditVideo={() => setEditMovieVisible(true)}
         selectedFilm={selectedFilm}
         setSelectedFilm={(film) => selectFilmHandler(film)}
+        genre={genre}
+        sortOption={sortOption}
       />
       <div className={'main-page__footer'}>
         <span className={'main-logo'}><b>netflix</b>roulette</span>

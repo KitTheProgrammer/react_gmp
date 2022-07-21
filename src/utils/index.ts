@@ -1,5 +1,5 @@
 import { GetFilmsParams } from '../types'
-import { sortEntries } from '../GlobalConstants'
+import { genreLabels, sortEntries } from '../GlobalConstants'
 import { SORT_ALPHABET, SORT_ALPHABET_REVERSE, SORT_RELEASE } from './i18n'
 
 export const getInputFormattedTime = (d: string | number) => {
@@ -23,4 +23,4 @@ export const getSortParams = (option: number): GetFilmsParams => {
   }
 }
 
-export const getGenreParams = (option: string): GetFilmsParams => ({ filter: [ option ] })
+export const getGenreParams = (option: string): GetFilmsParams => option !== genreLabels[0] ? { filter: [ option ] } : {}

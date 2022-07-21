@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Film, TopBar } from '../../pages/MainPage/components'
 import { BodyProps } from '../../types'
-import { useAppDispatch, useAppSelector, useQuery } from '../../hooks'
-import { setGenreOption, setSortOption } from '../../actions'
+import { useAppDispatch, useQuery } from '../../hooks'
+import { setSearchOptions } from '../../actions'
 
 import './styles.scss'
 import { genreLabels, sortItems } from '../../GlobalConstants'
@@ -11,19 +11,16 @@ import { genreLabels, sortItems } from '../../GlobalConstants'
 const Body: React.FC<BodyProps> = (props) => {
   const dispatch = useAppDispatch()
 
-  const { films, onEditVideo, onDeleteVideo, selectedFilm, setSelectedFilm } = props
+  const { films, onEditVideo, onDeleteVideo, selectedFilm, setSelectedFilm, genre, sortOption } = props
 
-  const query = useQuery()
-  const genre = query.get('genre') || genreLabels[0]
-  const sortOption = Number(query.get('sortBy')) || 0
+  useEffect(() => {
+    dispatch(setSearchOptions(genre, sortOption))
+  }, [dispatch, genre, sortOption])
 
   return (
     <div className={'main-body'}>
       <TopBar
         genre={genre}
-        setGenre={(genre) => dispatch(setGenreOption(genre))}
-        currentSortItem={sortOption}
-        setSortItem={(option) => dispatch(setSortOption(option))}
         sortItems={sortItems}
         filmsFound={films.length}
       />

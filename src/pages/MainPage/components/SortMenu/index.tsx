@@ -7,7 +7,7 @@ import { useQuery } from '../../../../hooks'
 
 import './styles.scss'
 
-const SortMenu: React.FC<SortMenuProps> = ({ sortItems, setSortItem }) => {
+const SortMenu: React.FC<SortMenuProps> = ({ sortItems }) => {
   const [isOpen, setIsOpen] = useState(false)
   const query = useQuery()
   const currentSortItem = Number(query.get('sortBy')) || 0
@@ -21,7 +21,6 @@ const SortMenu: React.FC<SortMenuProps> = ({ sortItems, setSortItem }) => {
       query.delete('sortBy')
     }
     navigate(`${pathname}?${query.toString()}`, { replace: true })
-    setSortItem(id)
   }
 
   return <div className={'sort-menu'}>
