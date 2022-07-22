@@ -4,8 +4,8 @@ import { Body, Header, Modal } from '../../components'
 import { EditMovieModal } from './components'
 import { useAppDispatch, useAppSelector, useQuery } from '../../hooks'
 import { setError, setSelectedFilm } from '../../redux/reducers/films'
-import { createFilm, deleteFilm, getFilms, updateFilms } from '../../api'
-import { useNavigate } from 'react-router-dom'
+import { createFilm, deleteFilm, updateFilms } from '../../api'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { FilmData } from '../../types'
 
 import './styles.scss'
@@ -19,6 +19,8 @@ const MainPage = (): React.ReactElement => {
   const movie = query.get('movie')
   const genre = query.get('genre') || genreLabels[0]
   const sortOption = Number(query.get('sortBy')) || 0
+  const pathname = useLocation().pathname
+  const { searchQuery } = useParams()
 
   const films = useAppSelector(({ films }) => films.films)
   const selectedFilm = useAppSelector(({ films }) => films.selectedFilm)
@@ -28,8 +30,8 @@ const MainPage = (): React.ReactElement => {
   const [editMovieVisible, setEditMovieVisible] = useState(false)
 
   useEffect(() => {
-    dispatch(setSearchOptions(genre, sortOption))
-  }, [dispatch, genre, sortOption])
+    dispatch(setSearchOptions(genre, sortOption, searchQuery))
+  }, [dispatch, genre, sortOption, searchQuery])
 
   useEffect(() => {
     dispatch(setSelectedFilm(Number(movie)))
@@ -73,7 +75,7 @@ const MainPage = (): React.ReactElement => {
     } else {
       query.delete('movie')
     }
-    navigate(`/search?${query.toString()}`, { replace: true })
+    navigate(`${pathname}?${query.toString()}`, { replace: true })
     dispatch(setSelectedFilm(film))
   }
 

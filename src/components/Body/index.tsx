@@ -1,21 +1,13 @@
-import React, { useEffect } from 'react'
+import React  from 'react'
 
 import { Film, TopBar } from '../../pages/MainPage/components'
 import { BodyProps } from '../../types'
-import { useAppDispatch, useQuery } from '../../hooks'
-import { setSearchOptions } from '../../actions'
 
 import './styles.scss'
-import { genreLabels, sortItems } from '../../GlobalConstants'
+import { sortItems } from '../../GlobalConstants'
 
 const Body: React.FC<BodyProps> = (props) => {
-  const dispatch = useAppDispatch()
-
-  const { films, onEditVideo, onDeleteVideo, selectedFilm, setSelectedFilm, genre, sortOption } = props
-
-  useEffect(() => {
-    dispatch(setSearchOptions(genre, sortOption))
-  }, [dispatch, genre, sortOption])
+  const { films, onEditVideo, onDeleteVideo, selectedFilm, setSelectedFilm, genre } = props
 
   return (
     <div className={'main-body'}>

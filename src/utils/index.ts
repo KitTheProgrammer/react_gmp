@@ -14,7 +14,7 @@ export const getTimeframeFormat = (value: number) => {
   return `${(value > 60) ? `${Math.floor(value / 60)}h ${value % 60}min` : `${value}min`}`
 }
 
-export const getSortParams = (option: number): GetFilmsParams => {
+export const getSortParams = (option?: number): GetFilmsParams => {
   switch (option) {
   case (sortEntries[SORT_RELEASE]): return { sortBy: 'release_date', sortOrder: 'desc' }
   case (sortEntries[SORT_ALPHABET]): return { sortBy: 'title', sortOrder: 'asc' }
@@ -24,3 +24,5 @@ export const getSortParams = (option: number): GetFilmsParams => {
 }
 
 export const getGenreParams = (option: string): GetFilmsParams => option !== genreLabels[0] ? { filter: [ option ] } : {}
+
+export const getSearchParams = (option?: string): GetFilmsParams => option ? { search: option, searchBy: 'title' } : {}

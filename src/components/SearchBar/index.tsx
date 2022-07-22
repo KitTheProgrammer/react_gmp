@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { searchBarPlaceholder } from '../../GlobalConstants'
 
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from '../../hooks'
 
 import './styles.scss'
@@ -11,7 +11,6 @@ const SearchBar = () => {
   const navigate = useNavigate()
   const { searchQuery } = useParams()
   const query = useQuery()
-  // const pathname = useLocation().pathname
 
   useEffect(() => {
     searchQuery && setSearchInput(searchQuery)
