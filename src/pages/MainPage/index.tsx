@@ -1,15 +1,26 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
-import { Header, Body, Modal } from '../../components'
+import { Body, Header, Modal } from '../../components'
 import { EditMovieModal } from './components'
-import { useAppDispatch, useAppSelector } from '../../hooks'
+import { useAppDispatch, useAppSelector, useQuery } from '../../hooks'
 import { setError, setSelectedFilm } from '../../redux/reducers/films'
-import { createFilm, deleteFilm, getFilms, updateFilms } from '../../api'
+import { createFilm, deleteFilm, updateFilms } from '../../api'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { FilmData } from '../../types'
 
 import './styles.scss'
+import { genreLabels } from '../../GlobalConstants'
+import { setSearchOptions } from '../../actions'
 
 const MainPage = (): React.ReactElement => {
   const dispatch = useAppDispatch()
+  const query = useQuery()
+  const navigate = useNavigate()
+  const movie = query.get('movie')
+  const genre = query.get('genre') || genreLabels[0]
+  const sortOption = Number(query.get('sortBy')) || 0
+  const pathname = useLocation().pathname
+  const { searchQuery } = useParams()
 
   const films = useAppSelector(({ films }) => films.films)
   const selectedFilm = useAppSelector(({ films }) => films.selectedFilm)
@@ -17,11 +28,14 @@ const MainPage = (): React.ReactElement => {
 
   const [deleteModalVisible, setDeleteModalVisible] = useState(false)
   const [editMovieVisible, setEditMovieVisible] = useState(false)
-  
-  useEffect(() => {
-    dispatch(getFilms({ sortBy: 'release_date', sortOrder: 'desc' }))
-  }, [dispatch])
 
+  useEffect(() => {
+    dispatch(setSearchOptions(genre, sortOption, searchQuery))
+  }, [dispatch, genre, sortOption, searchQuery])
+
+  useEffect(() => {
+    dispatch(setSelectedFilm(Number(movie)))
+  }, [dispatch, movie, films])
 
   const clearError = () => {
     dispatch(setError({ error: false, errorMessage: '' }))
@@ -55,6 +69,16 @@ const MainPage = (): React.ReactElement => {
     setEditMovieVisible(true)
   }
 
+  const selectFilmHandler = (film: FilmData | null) => {
+    if (film?.id) {
+      query.set('movie', String(film.id))
+    } else {
+      query.delete('movie')
+    }
+    navigate(`${pathname}?${query.toString()}`, { replace: true })
+    dispatch(setSelectedFilm(film))
+  }
+
   return (
     <div className={'main-page'}>
       <Modal visible={error} title={'Error happened'} closeModal={clearError}>
@@ -73,13 +97,15 @@ const MainPage = (): React.ReactElement => {
         closeModal={() => setEditMovieVisible(false)}
         submitEdit={submitEdit}
       />
-      <Header addNewFilm={addNewFilm} close={() => dispatch(setSelectedFilm(null))} selectedFilm={selectedFilm}/>
+      <Header addNewFilm={addNewFilm} close={() => selectFilmHandler(null)} selectedFilm={selectedFilm}/>
       <Body
         films={films}
         onDeleteVideo={() => setDeleteModalVisible(true)}
         onEditVideo={() => setEditMovieVisible(true)}
         selectedFilm={selectedFilm}
-        setSelectedFilm={(film) => dispatch(setSelectedFilm(film))}
+        setSelectedFilm={(film) => selectFilmHandler(film)}
+        genre={genre}
+        sortOption={sortOption}
       />
       <div className={'main-page__footer'}>
         <span className={'main-logo'}><b>netflix</b>roulette</span>

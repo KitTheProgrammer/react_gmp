@@ -21,7 +21,7 @@ const validationScheme = Yup.object().shape({
   genre: Yup.array().required('Genre is required'),
   rating: Yup.number().required('Rating is required'),
   runtime: Yup.number().required('Movie runtime is required'),
-  description: Yup.string().required('Description is required'),
+  description: Yup.string(),
 })
 
 const EditMovieModal: React.FC<EditMovieModalProps> = (props) => {

@@ -1,15 +1,25 @@
-import React, { useState, useCallback } from 'react'
-// @ts-ignore
-import { searchBarPlaceholder } from '../../GlobalConstants.ts'
+import React, { useState, useCallback, useEffect } from 'react'
+import { searchBarPlaceholder } from '../../GlobalConstants'
+
+import { useNavigate, useParams } from 'react-router-dom'
+import { useQuery } from '../../hooks'
 
 import './styles.scss'
 
 const SearchBar = () => {
   const [searchInput, setSearchInput] = useState('')
+  const navigate = useNavigate()
+  const { searchQuery } = useParams()
+  const query = useQuery()
+
+  useEffect(() => {
+    searchQuery && setSearchInput(searchQuery)
+  }, [searchQuery])
 
   const invokeSearch = useCallback(() => {
-    alert(`Searched for "${searchInput}".`)
-  }, [searchInput])
+    const stringQuery = query.toString()
+    navigate(`/search${searchInput ? `/${searchInput}` : '' }${stringQuery ? `?${stringQuery}` : ''}`, { replace: true })
+  }, [searchInput, query])
 
   return <div className={'search-bar-wrapper'}>
     <span>FIND YOUR MOVIE</span>

@@ -21,6 +21,8 @@ export interface BodyProps {
   onDeleteVideo: (ind: number) => void
   selectedFilm: FilmData | null
   setSelectedFilm: React.Dispatch<React.SetStateAction<any>>
+  genre: string
+  sortOption: number
 }
 
 export interface EditMovieModalProps {
@@ -46,7 +48,6 @@ export interface FilmProps {
 
 export interface GenreMenuBarProps {
   genre: string
-  setGenre: (genre: string) => void
 }
 
 export interface ErrorBoundaryState {
@@ -63,8 +64,6 @@ export interface ErrorBoundaryProps {
 
 export interface SortMenuProps {
   sortItems: string[]
-  currentSortItem: number
-  setSortItem: (option: number) => void
 }
 
 export interface FormSelectProps {

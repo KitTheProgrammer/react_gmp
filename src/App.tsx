@@ -1,10 +1,11 @@
-import MainPage from './pages/MainPage'
+import React from 'react'
+import MainRouter from './routes'
 import '@fortawesome/fontawesome-free/css/all.css'
 
 function App() {
   return (
-    <MainPage/>
-  );
+    <MainRouter/>
+  )
 }
 
-export default App;
+export default App
