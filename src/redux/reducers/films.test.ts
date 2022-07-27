@@ -54,6 +54,7 @@ describe(('film reducer'), () => {
   })
 
   test('updateFilm', () => {
+
     expect(reducer(initialState, updateFilm(films[0]))).toEqual({ ...initialState, films: [films[0]] })
     expect(reducer({ ...initialState, films }, updateFilm({ ...films[0], id: films[1].id }))).toEqual({ ...initialState, films: [ films[0], { ...films[0], id: films[1].id } ] })
   })

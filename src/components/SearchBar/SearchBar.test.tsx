@@ -36,6 +36,7 @@ describe('SearchBar', () => {
     const { getByPlaceholderText, getByText } = render(<SearchBar/>, { wrapper: BrowserRouter })
     const input = getByPlaceholderText(searchBarPlaceholder)
     const button = getByText('SEARCH')
+
     fireEvent.change(input, { target: { value: testString } })
     fireEvent.click(button)
     expect(window.location.pathname).toBe(`/search/${testString}`)
