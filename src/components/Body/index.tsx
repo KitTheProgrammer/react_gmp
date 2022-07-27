@@ -1,28 +1,18 @@
-import React from 'react'
+import React  from 'react'
 
 import { Film, TopBar } from '../../pages/MainPage/components'
 import { BodyProps } from '../../types'
-import { useAppDispatch, useAppSelector } from '../../hooks'
-import { setGenreOption, setSortOption } from '../../actions'
 
 import './styles.scss'
 import { sortItems } from '../../GlobalConstants'
 
 const Body: React.FC<BodyProps> = (props) => {
-  const dispatch = useAppDispatch()
-
-  const { films, onEditVideo, onDeleteVideo, selectedFilm, setSelectedFilm } = props
-
-  const sortOption = useAppSelector(({ films }) => films.selectedSortOption)
-  const genre = useAppSelector(({ films }) => films.selectedGenre)
+  const { films, onEditVideo, onDeleteVideo, selectedFilm, setSelectedFilm, genre } = props
 
   return (
     <div className={'main-body'}>
       <TopBar
         genre={genre}
-        setGenre={(genre) => dispatch(setGenreOption(genre))}
-        currentSortItem={sortOption}
-        setSortItem={(option) => dispatch(setSortOption(option))}
         sortItems={sortItems}
         filmsFound={films.length}
       />
