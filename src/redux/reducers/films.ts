@@ -33,12 +33,6 @@ export const filmsSlice = createSlice({
         state.selectedFilm = action.payload
       }
     },
-    setSelectedGenre: (state, action: PayloadAction<string>) => {
-      state.selectedGenre = action.payload
-    },
-    setSelectedSortOption: (state, action: PayloadAction<number>) => {
-      state.selectedSortOption = action.payload
-    },
     updateFilm: (state, action: PayloadAction<FilmData>) => {
       const { payload } = action
       const filmsCopy = [...state.films]
@@ -50,15 +44,6 @@ export const filmsSlice = createSlice({
         state.films = [...filmsCopy, payload]
       }
     },
-    deleteFilm: (state, action: PayloadAction<number>) => {
-      const { payload } = action
-      const filmsCopy = [...state.films]
-      const filmInd = filmsCopy.findIndex((it) => it.id === payload)
-      if (filmInd !== -1) {
-        filmsCopy.splice(filmInd, 0)
-        state.films = filmsCopy
-      }
-    },
     setError: (state, action: PayloadAction<FilmsState['error']>) => {
       state.error = action.payload
     }
@@ -68,10 +53,7 @@ export const filmsSlice = createSlice({
 export const {
   setFilms,
   setSelectedFilm,
-  setSelectedGenre,
-  setSelectedSortOption,
   updateFilm,
-  deleteFilm,
   setError,
 } = filmsSlice.actions
 

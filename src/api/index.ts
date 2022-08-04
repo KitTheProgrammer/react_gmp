@@ -6,14 +6,17 @@ import { setError, setFilms, updateFilm } from '../redux/reducers/films'
 export const getFilms = (params: GetFilmsParams | null = null) => async (dispatch: React.Dispatch<any>) => {
   try {
     const res = await getMethod(`movies${(params) ? `?${getParamsString(params)}` : ''}`)
+    console.log('pls', res)
     if (res.status === 200) {
       const data: { data: MovieDataFromServer[] } = await res.json()
       const formattedData: FilmData[] = data.data.map((m) => movieToFilm(m))
+      console.log(formattedData)
       dispatch(setFilms(formattedData))
     } else {
       dispatch(setError({ error: true, errorMessage: 'Error at fetching the movies (server error)' }))
     }
   } catch (err) {
+    console.log('error', err)
     dispatch(setError({ error: true, errorMessage: `Error at fetching the movies ${err}` }))
   }
 }
