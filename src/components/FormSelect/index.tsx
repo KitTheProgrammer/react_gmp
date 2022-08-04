@@ -3,7 +3,6 @@ import React, { useCallback, useRef, useState } from 'react'
 import { ArrowDown } from '../../assets/icons'
 import { FormSelectProps } from '../../types'
 
-import './styles.scss'
 import { useOnClickOutside } from '../../hooks'
 import { useField } from 'formik'
 

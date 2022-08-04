@@ -4,25 +4,31 @@ import { Body, Header, Modal } from '../../components'
 import { EditMovieModal } from './components'
 import { useAppDispatch, useAppSelector, useQuery } from '../../hooks'
 import { setError, setSelectedFilm } from '../../redux/reducers/films'
-import { createFilm, deleteFilm, updateFilms } from '../../api'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { createFilm, deleteFilm, getFilmsForSSR, updateFilms } from '../../api'
+// import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { FilmData } from '../../types'
 
-import './styles.scss'
+import { useRouter } from 'next/router'
 import { genreLabels } from '../../GlobalConstants'
 import { setSearchOptions } from '../../actions'
+import { getGenreParams, getSearchParams, getSortParams } from '../../utils'
 
-const MainPage = (): React.ReactElement => {
+const search: React.FC = ({ filmsFromProp }) => {
   const dispatch = useAppDispatch()
-  const query = useQuery()
-  const navigate = useNavigate()
-  const movie = query.get('movie')
-  const genre = query.get('genre') || genreLabels[0]
-  const sortOption = Number(query.get('sortBy')) || 0
-  const pathname = useLocation().pathname
-  const { searchQuery } = useParams()
+  const router = useRouter()
+  const query = router.query
+  const movie = query.movie as string
+  const genre = query.genre as string || genreLabels[0]
+  const sortOption = Number(query.sortBy) || 0
+  const searchQuery = query.searchQuery as string
 
-  const films = useAppSelector(({ films }) => films.films)
+  let films = filmsFromProp
+
+  if (searchQuery || genre !== genreLabels[0] || sortOption || movie) {
+    films = useAppSelector(({ films }) => films.films)
+  }
+
+
   const selectedFilm = useAppSelector(({ films }) => films.selectedFilm)
   const { error, errorMessage } = useAppSelector(({ films }) => films.error)
 
@@ -70,14 +76,18 @@ const MainPage = (): React.ReactElement => {
   }
 
   const selectFilmHandler = (film: FilmData | null) => {
+    delete query.searchQuery
     if (film?.id) {
-      query.set('movie', String(film.id))
+      router.push({ pathname: window.location.pathname, query: { ...query, movie: film.id  } } )
     } else {
-      query.delete('movie')
+      delete query.movie
+      router.push({ pathname: window.location.pathname, query } )
     }
-    navigate(`${pathname}?${query.toString()}`, { replace: true })
+    // navigate(`${pathname}?${query.toString()}`, { replace: true })
     dispatch(setSelectedFilm(film))
   }
+
+  // return <div>Hello</div>
 
   return (
     <div className={'main-page'}>
@@ -114,4 +124,9 @@ const MainPage = (): React.ReactElement => {
   )
 }
 
-export default MainPage
+export async function getServerSideProps({ query: { searchQuery, sortBy, genre } }) {
+  const films = await getFilmsForSSR({ ...getSortParams(sortBy), ...getGenreParams(genre), ...getSearchParams(searchQuery) })
+  return { props: { filmsFromProp: films } }
+}
+
+export default search

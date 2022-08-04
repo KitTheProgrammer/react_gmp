@@ -1,22 +1,18 @@
 import React from 'react'
 
 import { genreLabels, genreLabels as labels } from '../../../../GlobalConstants'
-
-import './styles.scss'
-import { useQuery } from '../../../../hooks'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/router'
 
 const GenreMenuBar = (): React.ReactElement => {
-  const query = useQuery()
-  const currGenre = query.get('genre') || genreLabels[0]
-  const navigate = useNavigate()
-  const pathname = useLocation().pathname
+  const router = useRouter()
+  const query = router.query
+  const currGenre = query.genre as string || genreLabels[0]
 
   const handleClick = (genre: string) => {
     if (genre) {
-      query.set('genre', String(genre))
+      delete query.searchQuery
+      router.push({ pathname: window.location.pathname, query: { ...query, genre } })
     }
-    navigate(`${pathname}?${query.toString()}`, { replace: true })
   }
 
   return (<nav className={'genre-menu-bar genre-menu-bar__black'}>
