@@ -13,7 +13,7 @@ import { genreLabels } from '../../GlobalConstants'
 import { setSearchOptions } from '../../actions'
 import { getGenreParams, getSearchParams, getSortParams } from '../../utils'
 
-const search: React.FC = ({ filmsFromProp }) => {
+const Search: React.FC = ({ filmsFromProp }) => {
   const dispatch = useAppDispatch()
   const router = useRouter()
   const query = router.query
@@ -129,4 +129,4 @@ export async function getServerSideProps({ query: { searchQuery, sortBy, genre }
   return { props: { filmsFromProp: films } }
 }
 
-export default search
+export default Search
