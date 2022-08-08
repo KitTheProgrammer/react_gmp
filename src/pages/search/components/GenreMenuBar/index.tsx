@@ -10,7 +10,7 @@ const GenreMenuBar = (): React.ReactElement => {
 
   const handleClick = (genre: string) => {
     if (genre) {
-      delete query.searchQuery
+      delete query.slug
       router.push({ pathname: window.location.pathname, query: { ...query, genre } })
     }
   }

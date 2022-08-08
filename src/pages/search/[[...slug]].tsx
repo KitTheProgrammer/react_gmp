@@ -20,7 +20,7 @@ const Search: React.FC = ({ filmsFromProp }) => {
   const movie = query.movie as string
   const genre = query.genre as string || genreLabels[0]
   const sortOption = Number(query.sortBy) || 0
-  const searchQuery = query.searchQuery as string
+  const [searchQuery] = query.slug as string || []
 
   let films = filmsFromProp
 
@@ -40,7 +40,12 @@ const Search: React.FC = ({ filmsFromProp }) => {
   }, [dispatch, genre, sortOption, searchQuery])
 
   useEffect(() => {
-    dispatch(setSelectedFilm(Number(movie)))
+    const id = Number(movie)
+    if (isNaN(id)) {
+      dispatch(setSelectedFilm(null))
+      return
+    }
+    dispatch(setSelectedFilm(id))
   }, [dispatch, movie, films])
 
   const clearError = () => {
@@ -76,7 +81,8 @@ const Search: React.FC = ({ filmsFromProp }) => {
   }
 
   const selectFilmHandler = (film: FilmData | null) => {
-    delete query.searchQuery
+    console.log('click1')
+    delete query.slug
     if (film?.id) {
       router.push({ pathname: window.location.pathname, query: { ...query, movie: film.id  } } )
     } else {
@@ -84,7 +90,8 @@ const Search: React.FC = ({ filmsFromProp }) => {
       router.push({ pathname: window.location.pathname, query } )
     }
     // navigate(`${pathname}?${query.toString()}`, { replace: true })
-    dispatch(setSelectedFilm(film))
+    console.log('click2')
+    // dispatch(setSelectedFilm(film))
   }
 
   // return <div>Hello</div>
@@ -124,7 +131,8 @@ const Search: React.FC = ({ filmsFromProp }) => {
   )
 }
 
-export async function getServerSideProps({ query: { searchQuery, sortBy, genre } }) {
+export async function getServerSideProps({ query: { sortBy, genre }, query }) {
+  const [ searchQuery ] = query?.slug || []
   const films = await getFilmsForSSR({ ...getSortParams(sortBy), ...getGenreParams(genre), ...getSearchParams(searchQuery) })
   return { props: { filmsFromProp: films } }
 }

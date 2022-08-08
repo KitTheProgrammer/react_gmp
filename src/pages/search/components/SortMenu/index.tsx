@@ -14,7 +14,7 @@ const SortMenu: React.FC<SortMenuProps> = ({ sortItems }) => {
   const currentSortItem = Number(query.sortBy) || 0
 
   const handleClick = (id: number) => {
-    delete query.searchQuery
+    delete query.slug
     if (id) {
       router.push({ pathname: window.location.pathname, query: { ...query, sortBy: id } })
       // query.set('sortBy', String(id))

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
-import MainPage from '../pages/search'
+import MainPage from '../pages/search/[[...slug]]'
 
 const MainRouter: React.FC = () => (<Routes>
   <Route path={'/search'} element={<MainPage/>}>

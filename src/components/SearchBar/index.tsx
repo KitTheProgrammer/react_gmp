@@ -9,14 +9,14 @@ const SearchBar = () => {
   const [searchInput, setSearchInput] = useState('')
   const router = useRouter()
   const query = router.query
-  const searchQuery = query.searchQuery as string
+  const [searchQuery] = query.slug as string || []
 
   useEffect(() => {
     searchQuery && setSearchInput(searchQuery)
   }, [searchQuery])
 
   const invokeSearch = useCallback(() => {
-    delete query.searchQuery
+    delete query.slug
     router.push({ pathname: `/search${searchInput ? `/${searchInput}` : ''}`, query })
   }, [searchInput, query])
 
