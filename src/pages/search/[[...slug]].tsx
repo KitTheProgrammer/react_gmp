@@ -2,10 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import { Body, Header, Modal } from '../../components'
 import { EditMovieModal } from './components'
-import { useAppDispatch, useAppSelector, useQuery } from '../../hooks'
+import { useAppDispatch, useAppSelector } from '../../hooks'
 import { setError, setSelectedFilm } from '../../redux/reducers/films'
 import { createFilm, deleteFilm, getFilmsForSSR, updateFilms } from '../../api'
-// import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { FilmData } from '../../types'
 
 import { useRouter } from 'next/router'
@@ -43,9 +42,9 @@ const Search: React.FC = ({ filmsFromProp }) => {
     const id = Number(movie)
     if (isNaN(id)) {
       dispatch(setSelectedFilm(null))
-      return
+    } else {
+      dispatch(setSelectedFilm(id))
     }
-    dispatch(setSelectedFilm(id))
   }, [dispatch, movie, films])
 
   const clearError = () => {
@@ -81,7 +80,6 @@ const Search: React.FC = ({ filmsFromProp }) => {
   }
 
   const selectFilmHandler = (film: FilmData | null) => {
-    console.log('click1')
     delete query.slug
     if (film?.id) {
       router.push({ pathname: window.location.pathname, query: { ...query, movie: film.id  } } )
@@ -89,12 +87,7 @@ const Search: React.FC = ({ filmsFromProp }) => {
       delete query.movie
       router.push({ pathname: window.location.pathname, query } )
     }
-    // navigate(`${pathname}?${query.toString()}`, { replace: true })
-    console.log('click2')
-    // dispatch(setSelectedFilm(film))
   }
-
-  // return <div>Hello</div>
 
   return (
     <div className={'main-page'}>

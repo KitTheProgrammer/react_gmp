@@ -1,8 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { genreLabels, searchBarPlaceholder } from '../../GlobalConstants'
+import { searchBarPlaceholder } from '../../GlobalConstants'
 
-// import { useNavigate, useParams } from 'react-router-dom'
-import { useQuery } from '../../hooks'
 import { useRouter } from 'next/router'
 
 const SearchBar = () => {

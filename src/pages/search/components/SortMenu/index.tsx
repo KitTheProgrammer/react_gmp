@@ -2,10 +2,7 @@ import React, {useState} from 'react'
 
 import { ArrowDown } from '../../../../assets/icons'
 import { SortMenuProps } from '../../../../types'
-// import { useLocation, useNavigate } from 'react-router-dom'
-import { useQuery } from '../../../../hooks'
 import { useRouter } from 'next/router'
-import { genreLabels } from '../../../../GlobalConstants'
 
 const SortMenu: React.FC<SortMenuProps> = ({ sortItems }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -17,13 +14,10 @@ const SortMenu: React.FC<SortMenuProps> = ({ sortItems }) => {
     delete query.slug
     if (id) {
       router.push({ pathname: window.location.pathname, query: { ...query, sortBy: id } })
-      // query.set('sortBy', String(id))
     } else {
       delete query.sortBy
       router.push({ pathname: window.location.pathname, query })
-      // query.delete('sortBy')
     }
-    // navigate(`${pathname}?${query.toString()}`, { replace: true })
   }
 
   return <div className={'sort-menu'}>
