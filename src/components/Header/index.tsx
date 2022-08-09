@@ -4,8 +4,6 @@ import { AddMovieButton, SearchBar } from '../index'
 import { getTimeframeFormat } from '../../utils'
 import { HeaderProps } from '../../types'
 
-import './styles.scss'
-
 const Header: React.FC<HeaderProps> = ({ addNewFilm, selectedFilm, close }) => (
   <div className={`header${(selectedFilm) ? ' header--film' : ''}`}>
     {!selectedFilm

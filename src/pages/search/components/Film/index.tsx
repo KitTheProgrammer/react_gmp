@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 
 import { FilmProps } from '../../../../types'
 
-import './styles.scss'
-
 const Film: React.FC<FilmProps> = (props) => {
   const { imgHref, releaseDate, title, genre, index, selected, onClick, onDelete, onEdit, data } = props
 

@@ -6,8 +6,6 @@ import { FormInput, FormSelect, Modal } from '../../../../components'
 import { genreLabels } from '../../../../GlobalConstants'
 import { EditMovieModalProps } from '../../../../types'
 
-import './styles.scss'
-
 const validationScheme = Yup.object().shape({
   title: Yup.string().required('Title is required'),
   releaseDate: Yup.string().required('Release date is required'),

@@ -1,23 +1,21 @@
 import React  from 'react'
 
-import { Film, TopBar } from '../../pages/MainPage/components'
+import { Film, TopBar } from '../../pages/search/components'
 import { BodyProps } from '../../types'
 
-import './styles.scss'
 import { sortItems } from '../../GlobalConstants'
 
 const Body: React.FC<BodyProps> = (props) => {
   const { films, onEditVideo, onDeleteVideo, selectedFilm, setSelectedFilm, genre } = props
-
   return (
     <div className={'main-body'}>
       <TopBar
         genre={genre}
         sortItems={sortItems}
-        filmsFound={films.length}
+        filmsFound={films?.length || 0}
       />
       <div className={'main-body__film-bar'}>
-        {films.map((data) => (
+        {films?.map((data) => (
           <Film
             imgHref={data.imgHref}
             genre={data.genre}

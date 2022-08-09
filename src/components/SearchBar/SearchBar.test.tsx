@@ -47,7 +47,6 @@ describe('SearchBar', () => {
     const input = getByPlaceholderText(searchBarPlaceholder)
     expect(input).toBeEmptyDOMElement()
     window.location.pathname = `search/${testString}`
-    console.log(window.location.toString())
     expect(getByDisplayValue(testString)).toBeInTheDocument()
   })
 })

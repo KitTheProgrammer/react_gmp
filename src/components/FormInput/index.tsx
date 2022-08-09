@@ -4,8 +4,6 @@ import { useField } from 'formik'
 import { getInputFormattedTime, getTimeframeFormat } from '../../utils'
 import { FormInputProps } from '../../types'
 
-import './styles.scss'
-
 const FormInput: React.FC<FormInputProps> = (props) => {
   const { label, placeholder, className, type, name } = props
 

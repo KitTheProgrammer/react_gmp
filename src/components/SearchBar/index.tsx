@@ -1,24 +1,21 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { searchBarPlaceholder } from '../../GlobalConstants'
 
-import { useNavigate, useParams } from 'react-router-dom'
-import { useQuery } from '../../hooks'
-
-import './styles.scss'
+import { useRouter } from 'next/router'
 
 const SearchBar = () => {
   const [searchInput, setSearchInput] = useState('')
-  const navigate = useNavigate()
-  const { searchQuery } = useParams()
-  const query = useQuery()
+  const router = useRouter()
+  const query = router.query
+  const [searchQuery] = query.slug as string || []
 
   useEffect(() => {
     searchQuery && setSearchInput(searchQuery)
   }, [searchQuery])
 
   const invokeSearch = useCallback(() => {
-    const stringQuery = query.toString()
-    navigate(`/search${searchInput ? `/${searchInput}` : '' }${stringQuery ? `?${stringQuery}` : ''}`, { replace: true })
+    delete query.slug
+    router.push({ pathname: `/search${searchInput ? `/${searchInput}` : ''}`, query })
   }, [searchInput, query])
 
   return <div className={'search-bar-wrapper'}>
